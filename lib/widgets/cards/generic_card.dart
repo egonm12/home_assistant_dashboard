@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_assistant_dashboard/data/models/light_state/light_state_model.dart';
+import 'package:home_assistant_dashboard/widgets/cards/switch.dart';
 
-import '../slider/custom_track_shape.dart';
+import '../slider/custom_slider_track_shape.dart';
+import '../slider/custom_thumb_shape.dart';
 
 class GenericCard extends StatefulWidget {
   const GenericCard({
@@ -33,7 +35,6 @@ class _GenericCardState extends State<GenericCard> {
       rgbColor[2],
       1,
     );
-    print(brightness);
 
     return ClipRRect(
       borderRadius: const BorderRadius.all(
@@ -48,7 +49,7 @@ class _GenericCardState extends State<GenericCard> {
             Stack(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -74,7 +75,7 @@ class _GenericCardState extends State<GenericCard> {
                             ],
                           ),
                           const Spacer(flex: 9),
-                          Switch(value: isTurnedOn, onChanged: (power) {}),
+                          CustomSwitch(value: isTurnedOn, onToggle: (value) {}),
                         ],
                       ),
                     ],
@@ -92,7 +93,7 @@ class _GenericCardState extends State<GenericCard> {
                       SliderTheme(
                         data: SliderThemeData(
                           trackHeight: isChangingBrightness ? 120 : 8,
-                          trackShape: CustomTrackShape(
+                          trackShape: CustomSliderTrackShape(
                               isChanging: isChangingBrightness),
                           thumbShape: isChangingBrightness
                               ? CustomThumbShape(

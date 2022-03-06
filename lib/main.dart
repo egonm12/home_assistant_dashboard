@@ -49,23 +49,6 @@ class MyApp extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Slider(
-                  // max: 255,
-                  value: 0,
-                  onChanged: (value) {},
-                ),
-                // onChangeStart: (_) => setState(() {
-                //   isChangingBrightness = true;
-                // }),
-                // onChangeEnd: (_) => setState(() {
-                //   isChangingBrightness = false;
-                // }),
-                // thumbColor: Colors.white,
-                // activeColor: color,
-                // inactiveColor:
-                //     isChangingBrightness ? Colors.grey : null,
-
-                const Text('Hello World'),
                 GenericCard(
                   iconData: Icons.lightbulb,
                   lightState: LightStateModel.fromJson(data),
