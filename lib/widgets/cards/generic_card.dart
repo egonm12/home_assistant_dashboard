@@ -3,6 +3,7 @@ import 'package:home_assistant_dashboard/data/models/light_state/light_state_mod
 import 'package:home_assistant_dashboard/widgets/cards/switch.dart';
 
 import '../slider/custom_slider_track_shape.dart';
+import '../slider/custom_thumb_overlay_shape.dart';
 import '../slider/custom_thumb_shape.dart';
 
 class GenericCard extends StatefulWidget {
@@ -35,7 +36,8 @@ class _GenericCardState extends State<GenericCard> {
       rgbColor[2],
       1,
     );
-
+    final brightnessBalance = brightness / 255;
+    final brightnessPercentage = (brightnessBalance * 100).round();
     return ClipRRect(
       borderRadius: const BorderRadius.all(
         Radius.circular(8),
@@ -43,7 +45,28 @@ class _GenericCardState extends State<GenericCard> {
       child: Container(
         height: 120,
         width: double.infinity,
-        decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              color,
+              color.withOpacity(0.3),
+            ],
+            stops: [0.0, 0.8 + brightnessBalance],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.white,
+              offset: const Offset(
+                0,
+                -120,
+              ),
+              spreadRadius: 50.0 * brightnessBalance,
+              blurRadius: 50.0,
+            ),
+          ],
+        ),
         child: Stack(
           children: [
             Stack(
@@ -51,17 +74,15 @@ class _GenericCardState extends State<GenericCard> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: isChangingBrightness
+                        ? MainAxisAlignment.center
+                        : MainAxisAlignment.start,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Icon(
                             widget.iconData,
                             size: 35,
-                            color: isTurnedOn
-                                ? color
-                                : Theme.of(context).iconTheme.color,
                           ),
                           const Spacer(),
                           Column(
@@ -71,11 +92,17 @@ class _GenericCardState extends State<GenericCard> {
                                 widget.lightState.attributes.friendlyName,
                                 style: Theme.of(context).textTheme.headline6,
                               ),
-                              Text(isTurnedOn ? 'Aan' : 'Uit'),
+                              Text(isChangingBrightness
+                                  ? '$brightnessPercentage%'
+                                  : isTurnedOn
+                                      ? 'On'
+                                      : 'Off'),
                             ],
                           ),
                           const Spacer(flex: 9),
-                          CustomSwitch(value: isTurnedOn, onToggle: (value) {}),
+                          if (!isChangingBrightness)
+                            CustomSwitch(
+                                value: isTurnedOn, onToggle: (value) {}),
                         ],
                       ),
                     ],
@@ -84,6 +111,7 @@ class _GenericCardState extends State<GenericCard> {
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: isChangingBrightness ? 0.0 : 16.0,
+                    vertical: isChangingBrightness ? 0.0 : 16.0,
                   ),
                   child: Column(
                     mainAxisAlignment: isChangingBrightness
@@ -94,7 +122,22 @@ class _GenericCardState extends State<GenericCard> {
                         data: SliderThemeData(
                           trackHeight: isChangingBrightness ? 120 : 8,
                           trackShape: CustomSliderTrackShape(
-                              isChanging: isChangingBrightness),
+                            isChanging: isChangingBrightness,
+                            gradient: LinearGradient(
+                              colors: [
+                                Theme.of(context).highlightColor.withOpacity(
+                                      isChangingBrightness ? 0.0 : 0.95,
+                                    ),
+                                Colors.white.withOpacity(
+                                  isChangingBrightness ? 0.6 : 1.0,
+                                ),
+                              ],
+                            ),
+                          ),
+                          overlayShape: CustomThumbOverlayShape(
+                            overlayRadius: 60,
+                          ),
+                          overlayColor: Colors.transparent,
                           thumbShape: isChangingBrightness
                               ? CustomThumbShape(
                                   enabledThumbRadius: 60,
@@ -116,7 +159,7 @@ class _GenericCardState extends State<GenericCard> {
                           thumbColor: Colors.white,
                           activeColor: color,
                           inactiveColor:
-                              isChangingBrightness ? Colors.grey : null,
+                              isChangingBrightness ? Colors.transparent : null,
                         ),
                       ),
                     ],
@@ -124,30 +167,6 @@ class _GenericCardState extends State<GenericCard> {
                 ),
               ],
             ),
-            // if (isChangingBrightness)
-            //   SliderTheme(
-            //     data: SliderThemeData(
-            //       trackHeight: 100,
-            //       thumbShape: CustomThumbShape(
-            //         enabledThumbRadius: 50,
-            //       ),
-            //       trackShape: CustomRectTrackShape(),
-            //       // thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
-            //       // overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
-            //     ),
-            //     child: Slider(
-            //       max: 255,
-            //       value: brightness,
-            //       onChanged: (value) => setState(() {
-            //         brightness = value;
-            //       }),
-            //       onChangeEnd: (_) => setState(() {
-            //         isChangingBrightness = false;
-            //       }),
-            //       thumbColor: Colors.white,
-            //       activeColor: color,
-            //     ),
-            //   ),
           ],
         ),
       ),

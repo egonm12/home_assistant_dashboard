@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
   CustomSliderTrackShape({
     this.isChanging = false,
+    required this.gradient,
+    this.darkenInactive = true,
   });
 
   final bool isChanging;
+  final LinearGradient gradient;
+  final bool darkenInactive;
 
   @override
   Rect getPreferredRect({
@@ -16,10 +20,11 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
     bool isDiscrete = false,
   }) {
     final double trackHeight = sliderTheme.trackHeight ?? 8;
-    final double trackLeft = offset.dx;
+    final double trackLeft = isChanging ? offset.dx + 9 : offset.dx;
     final double trackTop =
         offset.dy + (parentBox.size.height - trackHeight) / 2;
-    final double trackWidth = parentBox.size.width;
+    final double trackWidth =
+        isChanging ? parentBox.size.width - 18 : parentBox.size.width;
 
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
   }
@@ -53,6 +58,24 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
       return;
     }
 
+    final Rect trackRect = getPreferredRect(
+      parentBox: parentBox,
+      offset: offset,
+      sliderTheme: sliderTheme,
+      isEnabled: isEnabled,
+      isDiscrete: isDiscrete,
+    );
+
+    final activeGradientRect = Rect.fromLTRB(
+      trackRect.left,
+      (textDirection == TextDirection.ltr)
+          ? trackRect.top - (additionalActiveTrackHeight / 2)
+          : trackRect.top,
+      thumbCenter.dx,
+      (textDirection == TextDirection.ltr)
+          ? trackRect.bottom + (additionalActiveTrackHeight / 2)
+          : trackRect.bottom,
+    );
     // Assign the track segment paints, which are leading: active and
     // trailing: inactive.
     final ColorTween activeTrackColorTween = ColorTween(
@@ -62,6 +85,7 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
         begin: sliderTheme.disabledInactiveTrackColor,
         end: sliderTheme.inactiveTrackColor);
     final Paint activePaint = Paint()
+      ..shader = gradient.createShader(activeGradientRect)
       ..color = activeTrackColorTween.evaluate(enableAnimation)!;
     final Paint inactivePaint = Paint()
       ..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
@@ -78,13 +102,6 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
         break;
     }
 
-    final Rect trackRect = getPreferredRect(
-      parentBox: parentBox,
-      offset: offset,
-      sliderTheme: sliderTheme,
-      isEnabled: isEnabled,
-      isDiscrete: isDiscrete,
-    );
     const Radius zeroRadius = Radius.circular(0.0);
     final Radius trackRadius =
         isChanging ? zeroRadius : Radius.circular(trackRect.height / 2);

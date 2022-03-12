@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
-class CustomThumbShape extends SliderComponentShape {
-  CustomThumbShape({
-    this.elevation = 1.0,
+class CustomThumbOverlayShape extends RoundSliderOverlayShape {
+  CustomThumbOverlayShape({
     this.pressedElevation = 6.0,
-    this.enabledThumbRadius = 10.0,
-    this.disabledThumbRadius = 10.0,
+    this.overlayRadius = 10.0,
   });
 
-  final double elevation;
   final double pressedElevation;
 
-  final double enabledThumbRadius;
-  final double disabledThumbRadius;
+  @override
+  // ignore: overridden_fields
+  final double overlayRadius;
 
   @override
   void paint(PaintingContext context, Offset center,
@@ -34,33 +31,22 @@ class CustomThumbShape extends SliderComponentShape {
     assert(sliderTheme.disabledThumbColor != null);
     assert(sliderTheme.thumbColor != null);
 
+    assert(context != null);
+    assert(center != null);
+    assert(activationAnimation != null);
+    assert(enableAnimation != null);
+    assert(labelPainter != null);
+    assert(parentBox != null);
+    assert(sliderTheme != null);
+    assert(textDirection != null);
+    assert(value != null);
+
     final Canvas canvas = context.canvas;
     final Tween<double> radiusTween = Tween<double>(
-      begin: disabledThumbRadius,
-      end: enabledThumbRadius,
+      begin: 0.0,
+      end: overlayRadius,
     );
-    final ColorTween colorTween = ColorTween(
-      begin: sliderTheme.disabledThumbColor,
-      end: sliderTheme.thumbColor,
-    );
-
-    final Color color = colorTween.evaluate(enableAnimation)!;
     final double radius = radiusTween.evaluate(enableAnimation);
-
-    final Tween<double> elevationTween = Tween<double>(
-      begin: elevation,
-      end: pressedElevation,
-    );
-
-    final double evaluatedElevation =
-        elevationTween.evaluate(activationAnimation);
-    final Path path = Path()
-      ..addArc(
-          Rect.fromCenter(
-              center: center, width: radius / 3.5, height: 2 * radius),
-          0,
-          math.pi * 2);
-    canvas.drawShadow(path, Colors.black, evaluatedElevation, true);
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -70,16 +56,16 @@ class CustomThumbShape extends SliderComponentShape {
           height: 2 * radius,
         ),
         Radius.elliptical(
-          enabledThumbRadius,
-          enabledThumbRadius,
+          overlayRadius,
+          overlayRadius,
         ),
       ),
-      Paint()..color = color,
+      Paint()..color = sliderTheme.overlayColor!,
     );
   }
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) {
-    return const Size(20, 40);
+    return const Size(0, 0);
   }
 }

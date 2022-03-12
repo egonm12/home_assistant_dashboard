@@ -19,17 +19,17 @@ final data = {
     "brightness": 153,
     "color_temp": 454,
     "hs_color": [29.79, 84.553],
-    "rgb_color": [255, 146, 39],
+    "rgb_color": [255, 147, 44],
     "xy_color": [0.579, 0.388],
     "mode": "normal",
     "dynamics": "none",
-    "friendly_name": "Hue go 1",
+    "friendly_name": "Livingroom",
     "supported_features": 40
   },
-  "last_changed": "2022-03-05T19:51:47.681942+00:00",
-  "last_updated": "2022-03-05T19:51:47.681942+00:00",
+  "last_changed": "2022-03-06T17:29:46.143123+00:00",
+  "last_updated": "2022-03-06T17:29:47.118813+00:00",
   "context": {
-    "id": "0086ed6086a63d12f2217eacd8285a43",
+    "id": "a4998cd100756a79836adf8e34ef8f37",
     "parent_id": null,
     "user_id": null
   }
