@@ -73,36 +73,55 @@ class _GenericCardState extends State<GenericCard> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: isChangingBrightness
-                        ? MainAxisAlignment.center
-                        : MainAxisAlignment.start,
+                  child: Stack(
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
-                            widget.iconData,
-                            size: 35,
+                          AnimatedAlign(
+                            alignment: isChangingBrightness
+                                ? Alignment.center
+                                : Alignment.topCenter,
+                            duration: const Duration(milliseconds: 65),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  widget.iconData,
+                                  size: 35,
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      widget.lightState.attributes.friendlyName,
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                    ),
+                                    Text(isChangingBrightness
+                                        ? '$brightnessPercentage%'
+                                        : isTurnedOn
+                                            ? 'On'
+                                            : 'Off'),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                          const Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.lightState.attributes.friendlyName,
-                                style: Theme.of(context).textTheme.headline6,
-                              ),
-                              Text(isChangingBrightness
-                                  ? '$brightnessPercentage%'
-                                  : isTurnedOn
-                                      ? 'On'
-                                      : 'Off'),
-                            ],
-                          ),
-                          const Spacer(flex: 9),
                           if (!isChangingBrightness)
-                            CustomSwitch(
-                                value: isTurnedOn, onToggle: (value) {}),
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: SizedBox(
+                                height: 35,
+                                child: CustomSwitch(
+                                  value: isTurnedOn,
+                                  onToggle: (value) {},
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                     ],
