@@ -56,7 +56,7 @@ class _GenericCardState extends State<GenericCard>
       1,
     );
     final brightnessBalance = brightness / 255;
-    final brightnessPercentage = (brightnessBalance * 100).round();
+    final brightnessPercentage = (brightnessBalance * 100).ceil();
 
     return ClipRRect(
       borderRadius: const BorderRadius.all(
@@ -195,6 +195,7 @@ class _GenericCardState extends State<GenericCard>
                             ),
                             child: Slider(
                               max: 255,
+                              min: 1,
                               value: brightness,
                               onChanged: (value) => setState(() {
                                 brightness = value;

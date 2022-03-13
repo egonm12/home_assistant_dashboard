@@ -26,7 +26,7 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
     final double trackTop =
         offset.dy + (parentBox.size.height - trackHeight) / 2;
     final double trackWidth = Tween<double>(
-            begin: parentBox.size.width, end: parentBox.size.width - 18)
+            begin: parentBox.size.width, end: parentBox.size.width - 17)
         .evaluate(animation);
 
     return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
@@ -81,10 +81,11 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
     );
 
     final gradientColorTweenLeft = ColorTween(
-        begin: Colors.white.withOpacity(0.9),
+        begin: Colors.white.withOpacity(0.1),
         end: Colors.white.withOpacity(0.0));
-    final gradientColorTweenRight =
-        ColorTween(begin: Colors.white, end: Colors.white.withOpacity(0.3));
+    final gradientColorTweenRight = ColorTween(
+        begin: Colors.white.withOpacity(0.7),
+        end: Colors.white.withOpacity(0.3));
     final _gradient = LinearGradient(
       colors: [
         gradientColorTweenLeft.evaluate(animation)!,
