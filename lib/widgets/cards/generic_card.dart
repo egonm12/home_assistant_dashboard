@@ -22,9 +22,28 @@ class GenericCard extends StatefulWidget {
   State<GenericCard> createState() => _GenericCardState();
 }
 
-class _GenericCardState extends State<GenericCard> {
+class _GenericCardState extends State<GenericCard>
+    with TickerProviderStateMixin {
   double brightness = 20;
   bool isChangingBrightness = false;
+  late final AnimationController _animationController = AnimationController(
+    duration: const Duration(milliseconds: 75),
+    vsync: this,
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController.addListener(() {
+      // print(_animationController.value);
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +57,7 @@ class _GenericCardState extends State<GenericCard> {
     );
     final brightnessBalance = brightness / 255;
     final brightnessPercentage = (brightnessBalance * 100).round();
+
     return ClipRRect(
       borderRadius: const BorderRadius.all(
         Radius.circular(8),
@@ -101,11 +121,13 @@ class _GenericCardState extends State<GenericCard> {
                                       style:
                                           Theme.of(context).textTheme.headline6,
                                     ),
-                                    Text(isChangingBrightness
-                                        ? '$brightnessPercentage%'
-                                        : isTurnedOn
-                                            ? 'On'
-                                            : 'Off'),
+                                    Text(
+                                      isChangingBrightness
+                                          ? '$brightnessPercentage%'
+                                          : isTurnedOn
+                                              ? 'On'
+                                              : 'Off',
+                                    ),
                                   ],
                                 ),
                               ],
@@ -137,48 +159,61 @@ class _GenericCardState extends State<GenericCard> {
                         ? MainAxisAlignment.center
                         : MainAxisAlignment.end,
                     children: [
-                      SliderTheme(
-                        data: SliderThemeData(
-                          trackHeight: isChangingBrightness ? 120 : 8,
-                          trackShape: CustomSliderTrackShape(
-                            isChanging: isChangingBrightness,
-                            gradient: LinearGradient(
-                              colors: [
-                                Theme.of(context).highlightColor.withOpacity(
-                                      isChangingBrightness ? 0.0 : 0.95,
+                      SizedBox(
+                        height: 20,
+                        child: AnimatedBuilder(
+                          animation: _animationController,
+                          builder: (_, __) => SliderTheme(
+                            data: SliderThemeData(
+                              disabledInactiveTrackColor: Colors.blue,
+                              inactiveTrackColor:
+                                  Colors.white.withOpacity(0.15),
+                              trackShape: CustomSliderTrackShape(
+                                animation: _animationController.view,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Theme.of(context)
+                                        .highlightColor
+                                        .withOpacity(
+                                          0.9,
+                                        ),
+                                    Colors.white.withOpacity(
+                                      1.0,
                                     ),
-                                Colors.white.withOpacity(
-                                  isChangingBrightness ? 0.6 : 1.0,
+                                  ],
                                 ),
-                              ],
+                              ),
+                              overlayShape: CustomThumbOverlayShape(
+                                animation: _animationController.view,
+                                overlayRadius: 60,
+                              ),
+                              overlayColor: Colors.transparent,
+                              thumbShape: CustomThumbShape(
+                                animation: _animationController.view,
+                                enabledThumbRadius: 60,
+                              ),
+                            ),
+                            child: Slider(
+                              max: 255,
+                              value: brightness,
+                              onChanged: (value) => setState(() {
+                                brightness = value;
+                              }),
+                              onChangeStart: (_) => setState(() {
+                                isChangingBrightness = true;
+                                _animationController.animateTo(120);
+                              }),
+                              onChangeEnd: (_) => setState(() {
+                                isChangingBrightness = false;
+                                _animationController.animateTo(0);
+                              }),
+                              thumbColor: Colors.white,
+                              activeColor: color,
+                              inactiveColor: isChangingBrightness
+                                  ? Colors.transparent
+                                  : null,
                             ),
                           ),
-                          overlayShape: CustomThumbOverlayShape(
-                            overlayRadius: 60,
-                          ),
-                          overlayColor: Colors.transparent,
-                          thumbShape: isChangingBrightness
-                              ? CustomThumbShape(
-                                  enabledThumbRadius: 60,
-                                )
-                              : null,
-                        ),
-                        child: Slider(
-                          max: 255,
-                          value: brightness,
-                          onChanged: (value) => setState(() {
-                            brightness = value;
-                          }),
-                          onChangeStart: (_) => setState(() {
-                            isChangingBrightness = true;
-                          }),
-                          onChangeEnd: (_) => setState(() {
-                            isChangingBrightness = false;
-                          }),
-                          thumbColor: Colors.white,
-                          activeColor: color,
-                          inactiveColor:
-                              isChangingBrightness ? Colors.transparent : null,
                         ),
                       ),
                     ],

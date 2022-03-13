@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CustomThumbOverlayShape extends RoundSliderOverlayShape {
-  CustomThumbOverlayShape({
-    this.pressedElevation = 6.0,
-    this.overlayRadius = 10.0,
-  });
+  CustomThumbOverlayShape(
+      {this.pressedElevation = 6.0,
+      this.overlayRadius = 10.0,
+      required this.animation});
 
   final double pressedElevation;
+  final Animation<double> animation;
 
   @override
   // ignore: overridden_fields
@@ -46,7 +47,7 @@ class CustomThumbOverlayShape extends RoundSliderOverlayShape {
       begin: 0.0,
       end: overlayRadius,
     );
-    final double radius = radiusTween.evaluate(enableAnimation);
+    final double radius = radiusTween.evaluate(animation);
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(

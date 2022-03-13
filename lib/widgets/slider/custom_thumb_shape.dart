@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class CustomThumbShape extends SliderComponentShape {
-  CustomThumbShape({
-    this.elevation = 1.0,
-    this.pressedElevation = 6.0,
-    this.enabledThumbRadius = 10.0,
-    this.disabledThumbRadius = 10.0,
-  });
+  CustomThumbShape(
+      {this.elevation = 1.0,
+      this.pressedElevation = 6.0,
+      this.enabledThumbRadius = 10.0,
+      this.disabledThumbRadius = 10.0,
+      required this.animation});
 
   final double elevation;
   final double pressedElevation;
 
   final double enabledThumbRadius;
   final double disabledThumbRadius;
+  final Animation<double> animation;
 
   @override
   void paint(PaintingContext context, Offset center,
@@ -35,9 +36,13 @@ class CustomThumbShape extends SliderComponentShape {
     assert(sliderTheme.thumbColor != null);
 
     final Canvas canvas = context.canvas;
+
+    final thumbRadius =
+        Tween<double>(begin: 20, end: 60).evaluate(activationAnimation);
+
     final Tween<double> radiusTween = Tween<double>(
-      begin: disabledThumbRadius,
-      end: enabledThumbRadius,
+      begin: thumbRadius,
+      end: thumbRadius,
     );
     final ColorTween colorTween = ColorTween(
       begin: sliderTheme.disabledThumbColor,
@@ -45,7 +50,12 @@ class CustomThumbShape extends SliderComponentShape {
     );
 
     final Color color = colorTween.evaluate(enableAnimation)!;
-    final double radius = radiusTween.evaluate(enableAnimation);
+    final double radius = radiusTween.evaluate(animation);
+
+    final height = Tween<double>(begin: radius, end: radius * 2)
+        .evaluate(activationAnimation);
+    final width = Tween<double>(begin: radius, end: radius / 3.5)
+        .evaluate(activationAnimation);
 
     final Tween<double> elevationTween = Tween<double>(
       begin: elevation,
@@ -56,22 +66,22 @@ class CustomThumbShape extends SliderComponentShape {
         elevationTween.evaluate(activationAnimation);
     final Path path = Path()
       ..addArc(
-          Rect.fromCenter(
-              center: center, width: radius / 3.5, height: 2 * radius),
-          0,
-          math.pi * 2);
+        Rect.fromCenter(center: center, width: width, height: height),
+        0,
+        math.pi * 2,
+      );
     canvas.drawShadow(path, Colors.black, evaluatedElevation, true);
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromCenter(
           center: center,
-          width: radius / 3.5,
-          height: 2 * radius,
+          width: width,
+          height: height,
         ),
         Radius.elliptical(
-          enabledThumbRadius,
-          enabledThumbRadius,
+          thumbRadius,
+          thumbRadius,
         ),
       ),
       Paint()..color = color,
