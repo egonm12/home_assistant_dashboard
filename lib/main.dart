@@ -9,8 +9,8 @@ void main() {
 }
 
 final data = {
-  "entity_id": "light.hue_go_1",
-  "state": "on",
+  "entity_id": "light.woonkamer",
+  "state": "off",
   "attributes": {
     "min_mireds": 153,
     "max_mireds": 500,
@@ -19,17 +19,37 @@ final data = {
     "brightness": 153,
     "color_temp": 454,
     "hs_color": [29.79, 84.553],
-    "rgb_color": [255, 147, 44],
+    "rgb_color": [255, 146, 39],
     "xy_color": [0.579, 0.388],
-    "mode": "normal",
-    "dynamics": "none",
-    "friendly_name": "Livingroom",
+    "is_hue_group": true,
+    "hue_scenes": [
+      "Ontspannen",
+      "Gedimd",
+      "Nachtlampje",
+      "Energie",
+      "Helder",
+      "Arctische dageraad",
+      "Tropische schemering",
+      "Lentebloesem",
+      "Concentreren",
+      "Savanne zonsondergang",
+      "Lezen"
+    ],
+    "hue_type": "room",
+    "lights": [
+      "Lightstrip Woonkamer",
+      "Hue Lightstrip Woonkamer 2",
+      "Hue go 1"
+    ],
+    "dynamics": false,
+    "icon": "mdi:lightbulb-group",
+    "friendly_name": "Woonkamer",
     "supported_features": 40
   },
-  "last_changed": "2022-03-06T17:29:46.143123+00:00",
-  "last_updated": "2022-03-06T17:29:47.118813+00:00",
+  "last_changed": "2022-03-13T17:01:33.385849+00:00",
+  "last_updated": "2022-03-13T17:39:42.986677+00:00",
   "context": {
-    "id": "a4998cd100756a79836adf8e34ef8f37",
+    "id": "1e48bb2ccd8e733c1f5631c04032b99b",
     "parent_id": null,
     "user_id": null
   }
@@ -49,7 +69,7 @@ class MyApp extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GenericCard(
+                LightControlCard(
                   iconData: Icons.lightbulb,
                   lightState: LightStateModel.fromJson(data),
                   setBrightnessLevel: (double brightness) {},

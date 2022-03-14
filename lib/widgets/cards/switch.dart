@@ -15,7 +15,9 @@ class CustomSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterSwitch(
       width: 60,
-      activeColor: Theme.of(context).canvasColor,
+      inactiveColor: Theme.of(context).backgroundColor.withOpacity(0.75),
+      activeColor: Colors.black.withOpacity(0.35),
+      // toggleColor: Colors.red,
       onToggle: onToggle,
       value: value,
     );

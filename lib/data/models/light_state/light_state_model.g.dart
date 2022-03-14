@@ -29,24 +29,24 @@ Map<String, dynamic> _$$_LightStateModelToJson(_$_LightStateModel instance) =>
 
 _$_Attributes _$$_AttributesFromJson(Map<String, dynamic> json) =>
     _$_Attributes(
-      minMireds: json['min_mireds'] as int,
-      maxMireds: json['max_mireds'] as int,
-      supportedColorModes: (json['supported_color_modes'] as List<dynamic>)
-          .map((e) => e as String)
+      minMireds: json['min_mireds'] as int?,
+      maxMireds: json['max_mireds'] as int?,
+      supportedColorModes: (json['supported_color_modes'] as List<dynamic>?)
+          ?.map((e) => e as String)
           .toList(),
       colorMode: json['color_mode'] as String?,
-      brightness: roundToDouble(json['brightness'] as int),
-      colorTemp: json['color_temp'] as int,
-      hsColor: (json['hs_color'] as List<dynamic>)
-          .map((e) => (e as num).toDouble())
+      brightness: roundToDouble(json['brightness'] as int?),
+      colorTemp: json['color_temp'] as int?,
+      hsColor: (json['hs_color'] as List<dynamic>?)
+          ?.map((e) => (e as num).toDouble())
           .toList(),
       rgbColor:
-          (json['rgb_color'] as List<dynamic>).map((e) => e as int).toList(),
-      xyColor: (json['xy_color'] as List<dynamic>)
-          .map((e) => (e as num).toDouble())
+          (json['rgb_color'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      xyColor: (json['xy_color'] as List<dynamic>?)
+          ?.map((e) => (e as num).toDouble())
           .toList(),
-      mode: json['mode'] as String,
-      dynamics: json['dynamics'] as String,
+      mode: json['mode'] as String?,
+      dynamics: json['dynamics'],
       friendlyName: json['friendly_name'] as String,
       supportedFeatures: json['supported_features'] as int,
     );

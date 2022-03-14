@@ -327,30 +327,19 @@ class _$AttributesTearOff {
   const _$AttributesTearOff();
 
   _Attributes call(
-      {@JsonKey(name: 'min_mireds')
-          required int minMireds,
-      @JsonKey(name: 'max_mireds')
-          required int maxMireds,
-      @JsonKey(name: 'supported_color_modes')
-          required List<String> supportedColorModes,
-      @JsonKey(name: 'color_mode')
-          String? colorMode,
-      @JsonKey(name: 'brightness', fromJson: roundToDouble)
-          required double brightness,
-      @JsonKey(name: 'color_temp')
-          required int colorTemp,
-      @JsonKey(name: 'hs_color')
-          required List<double> hsColor,
-      @JsonKey(name: 'rgb_color')
-          required List<int> rgbColor,
-      @JsonKey(name: 'xy_color')
-          required List<double> xyColor,
-      required String mode,
-      required String dynamics,
-      @JsonKey(name: 'friendly_name')
-          required String friendlyName,
-      @JsonKey(name: 'supported_features')
-          required int supportedFeatures}) {
+      {@JsonKey(name: 'min_mireds') int? minMireds,
+      @JsonKey(name: 'max_mireds') int? maxMireds,
+      @JsonKey(name: 'supported_color_modes') List<String>? supportedColorModes,
+      @JsonKey(name: 'color_mode') String? colorMode,
+      @JsonKey(name: 'brightness', fromJson: roundToDouble) double? brightness,
+      @JsonKey(name: 'color_temp') int? colorTemp,
+      @JsonKey(name: 'hs_color') List<double>? hsColor,
+      @JsonKey(name: 'rgb_color') List<int>? rgbColor,
+      @JsonKey(name: 'xy_color') List<double>? xyColor,
+      required String? mode,
+      required dynamic dynamics,
+      @JsonKey(name: 'friendly_name') required String friendlyName,
+      @JsonKey(name: 'supported_features') required int supportedFeatures}) {
     return _Attributes(
       minMireds: minMireds,
       maxMireds: maxMireds,
@@ -379,25 +368,25 @@ const $Attributes = _$AttributesTearOff();
 /// @nodoc
 mixin _$Attributes {
   @JsonKey(name: 'min_mireds')
-  int get minMireds => throw _privateConstructorUsedError;
+  int? get minMireds => throw _privateConstructorUsedError;
   @JsonKey(name: 'max_mireds')
-  int get maxMireds => throw _privateConstructorUsedError;
+  int? get maxMireds => throw _privateConstructorUsedError;
   @JsonKey(name: 'supported_color_modes')
-  List<String> get supportedColorModes => throw _privateConstructorUsedError;
+  List<String>? get supportedColorModes => throw _privateConstructorUsedError;
   @JsonKey(name: 'color_mode')
   String? get colorMode => throw _privateConstructorUsedError;
   @JsonKey(name: 'brightness', fromJson: roundToDouble)
-  double get brightness => throw _privateConstructorUsedError;
+  double? get brightness => throw _privateConstructorUsedError;
   @JsonKey(name: 'color_temp')
-  int get colorTemp => throw _privateConstructorUsedError;
+  int? get colorTemp => throw _privateConstructorUsedError;
   @JsonKey(name: 'hs_color')
-  List<double> get hsColor => throw _privateConstructorUsedError;
+  List<double>? get hsColor => throw _privateConstructorUsedError;
   @JsonKey(name: 'rgb_color')
-  List<int> get rgbColor => throw _privateConstructorUsedError;
+  List<int>? get rgbColor => throw _privateConstructorUsedError;
   @JsonKey(name: 'xy_color')
-  List<double> get xyColor => throw _privateConstructorUsedError;
-  String get mode => throw _privateConstructorUsedError;
-  String get dynamics => throw _privateConstructorUsedError;
+  List<double>? get xyColor => throw _privateConstructorUsedError;
+  String? get mode => throw _privateConstructorUsedError;
+  dynamic get dynamics => throw _privateConstructorUsedError;
   @JsonKey(name: 'friendly_name')
   String get friendlyName => throw _privateConstructorUsedError;
   @JsonKey(name: 'supported_features')
@@ -415,17 +404,17 @@ abstract class $AttributesCopyWith<$Res> {
           Attributes value, $Res Function(Attributes) then) =
       _$AttributesCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: 'min_mireds') int minMireds,
-      @JsonKey(name: 'max_mireds') int maxMireds,
-      @JsonKey(name: 'supported_color_modes') List<String> supportedColorModes,
+      {@JsonKey(name: 'min_mireds') int? minMireds,
+      @JsonKey(name: 'max_mireds') int? maxMireds,
+      @JsonKey(name: 'supported_color_modes') List<String>? supportedColorModes,
       @JsonKey(name: 'color_mode') String? colorMode,
-      @JsonKey(name: 'brightness', fromJson: roundToDouble) double brightness,
-      @JsonKey(name: 'color_temp') int colorTemp,
-      @JsonKey(name: 'hs_color') List<double> hsColor,
-      @JsonKey(name: 'rgb_color') List<int> rgbColor,
-      @JsonKey(name: 'xy_color') List<double> xyColor,
-      String mode,
-      String dynamics,
+      @JsonKey(name: 'brightness', fromJson: roundToDouble) double? brightness,
+      @JsonKey(name: 'color_temp') int? colorTemp,
+      @JsonKey(name: 'hs_color') List<double>? hsColor,
+      @JsonKey(name: 'rgb_color') List<int>? rgbColor,
+      @JsonKey(name: 'xy_color') List<double>? xyColor,
+      String? mode,
+      dynamic dynamics,
       @JsonKey(name: 'friendly_name') String friendlyName,
       @JsonKey(name: 'supported_features') int supportedFeatures});
 }
@@ -458,15 +447,15 @@ class _$AttributesCopyWithImpl<$Res> implements $AttributesCopyWith<$Res> {
       minMireds: minMireds == freezed
           ? _value.minMireds
           : minMireds // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       maxMireds: maxMireds == freezed
           ? _value.maxMireds
           : maxMireds // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       supportedColorModes: supportedColorModes == freezed
           ? _value.supportedColorModes
           : supportedColorModes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
       colorMode: colorMode == freezed
           ? _value.colorMode
           : colorMode // ignore: cast_nullable_to_non_nullable
@@ -474,31 +463,31 @@ class _$AttributesCopyWithImpl<$Res> implements $AttributesCopyWith<$Res> {
       brightness: brightness == freezed
           ? _value.brightness
           : brightness // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       colorTemp: colorTemp == freezed
           ? _value.colorTemp
           : colorTemp // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       hsColor: hsColor == freezed
           ? _value.hsColor
           : hsColor // ignore: cast_nullable_to_non_nullable
-              as List<double>,
+              as List<double>?,
       rgbColor: rgbColor == freezed
           ? _value.rgbColor
           : rgbColor // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
       xyColor: xyColor == freezed
           ? _value.xyColor
           : xyColor // ignore: cast_nullable_to_non_nullable
-              as List<double>,
+              as List<double>?,
       mode: mode == freezed
           ? _value.mode
           : mode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       dynamics: dynamics == freezed
           ? _value.dynamics
           : dynamics // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       friendlyName: friendlyName == freezed
           ? _value.friendlyName
           : friendlyName // ignore: cast_nullable_to_non_nullable
@@ -518,17 +507,17 @@ abstract class _$AttributesCopyWith<$Res> implements $AttributesCopyWith<$Res> {
       __$AttributesCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: 'min_mireds') int minMireds,
-      @JsonKey(name: 'max_mireds') int maxMireds,
-      @JsonKey(name: 'supported_color_modes') List<String> supportedColorModes,
+      {@JsonKey(name: 'min_mireds') int? minMireds,
+      @JsonKey(name: 'max_mireds') int? maxMireds,
+      @JsonKey(name: 'supported_color_modes') List<String>? supportedColorModes,
       @JsonKey(name: 'color_mode') String? colorMode,
-      @JsonKey(name: 'brightness', fromJson: roundToDouble) double brightness,
-      @JsonKey(name: 'color_temp') int colorTemp,
-      @JsonKey(name: 'hs_color') List<double> hsColor,
-      @JsonKey(name: 'rgb_color') List<int> rgbColor,
-      @JsonKey(name: 'xy_color') List<double> xyColor,
-      String mode,
-      String dynamics,
+      @JsonKey(name: 'brightness', fromJson: roundToDouble) double? brightness,
+      @JsonKey(name: 'color_temp') int? colorTemp,
+      @JsonKey(name: 'hs_color') List<double>? hsColor,
+      @JsonKey(name: 'rgb_color') List<int>? rgbColor,
+      @JsonKey(name: 'xy_color') List<double>? xyColor,
+      String? mode,
+      dynamic dynamics,
       @JsonKey(name: 'friendly_name') String friendlyName,
       @JsonKey(name: 'supported_features') int supportedFeatures});
 }
@@ -563,15 +552,15 @@ class __$AttributesCopyWithImpl<$Res> extends _$AttributesCopyWithImpl<$Res>
       minMireds: minMireds == freezed
           ? _value.minMireds
           : minMireds // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       maxMireds: maxMireds == freezed
           ? _value.maxMireds
           : maxMireds // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       supportedColorModes: supportedColorModes == freezed
           ? _value.supportedColorModes
           : supportedColorModes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<String>?,
       colorMode: colorMode == freezed
           ? _value.colorMode
           : colorMode // ignore: cast_nullable_to_non_nullable
@@ -579,31 +568,31 @@ class __$AttributesCopyWithImpl<$Res> extends _$AttributesCopyWithImpl<$Res>
       brightness: brightness == freezed
           ? _value.brightness
           : brightness // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       colorTemp: colorTemp == freezed
           ? _value.colorTemp
           : colorTemp // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       hsColor: hsColor == freezed
           ? _value.hsColor
           : hsColor // ignore: cast_nullable_to_non_nullable
-              as List<double>,
+              as List<double>?,
       rgbColor: rgbColor == freezed
           ? _value.rgbColor
           : rgbColor // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<int>?,
       xyColor: xyColor == freezed
           ? _value.xyColor
           : xyColor // ignore: cast_nullable_to_non_nullable
-              as List<double>,
+              as List<double>?,
       mode: mode == freezed
           ? _value.mode
           : mode // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       dynamics: dynamics == freezed
           ? _value.dynamics
           : dynamics // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       friendlyName: friendlyName == freezed
           ? _value.friendlyName
           : friendlyName // ignore: cast_nullable_to_non_nullable
@@ -620,65 +609,54 @@ class __$AttributesCopyWithImpl<$Res> extends _$AttributesCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Attributes implements _Attributes {
   const _$_Attributes(
-      {@JsonKey(name: 'min_mireds')
-          required this.minMireds,
-      @JsonKey(name: 'max_mireds')
-          required this.maxMireds,
-      @JsonKey(name: 'supported_color_modes')
-          required this.supportedColorModes,
-      @JsonKey(name: 'color_mode')
-          this.colorMode,
-      @JsonKey(name: 'brightness', fromJson: roundToDouble)
-          required this.brightness,
-      @JsonKey(name: 'color_temp')
-          required this.colorTemp,
-      @JsonKey(name: 'hs_color')
-          required this.hsColor,
-      @JsonKey(name: 'rgb_color')
-          required this.rgbColor,
-      @JsonKey(name: 'xy_color')
-          required this.xyColor,
+      {@JsonKey(name: 'min_mireds') this.minMireds,
+      @JsonKey(name: 'max_mireds') this.maxMireds,
+      @JsonKey(name: 'supported_color_modes') this.supportedColorModes,
+      @JsonKey(name: 'color_mode') this.colorMode,
+      @JsonKey(name: 'brightness', fromJson: roundToDouble) this.brightness,
+      @JsonKey(name: 'color_temp') this.colorTemp,
+      @JsonKey(name: 'hs_color') this.hsColor,
+      @JsonKey(name: 'rgb_color') this.rgbColor,
+      @JsonKey(name: 'xy_color') this.xyColor,
       required this.mode,
       required this.dynamics,
-      @JsonKey(name: 'friendly_name')
-          required this.friendlyName,
-      @JsonKey(name: 'supported_features')
-          required this.supportedFeatures});
+      @JsonKey(name: 'friendly_name') required this.friendlyName,
+      @JsonKey(name: 'supported_features') required this.supportedFeatures});
 
   factory _$_Attributes.fromJson(Map<String, dynamic> json) =>
       _$$_AttributesFromJson(json);
 
   @override
   @JsonKey(name: 'min_mireds')
-  final int minMireds;
+  final int? minMireds;
   @override
   @JsonKey(name: 'max_mireds')
-  final int maxMireds;
+  final int? maxMireds;
   @override
   @JsonKey(name: 'supported_color_modes')
-  final List<String> supportedColorModes;
+  final List<String>? supportedColorModes;
   @override
   @JsonKey(name: 'color_mode')
   final String? colorMode;
   @override
   @JsonKey(name: 'brightness', fromJson: roundToDouble)
-  final double brightness;
+  final double? brightness;
   @override
   @JsonKey(name: 'color_temp')
-  final int colorTemp;
+  final int? colorTemp;
   @override
   @JsonKey(name: 'hs_color')
-  final List<double> hsColor;
+  final List<double>? hsColor;
   @override
   @JsonKey(name: 'rgb_color')
-  final List<int> rgbColor;
+  final List<int>? rgbColor;
   @override
   @JsonKey(name: 'xy_color')
-  final List<double> xyColor;
+  final List<double>? xyColor;
   @override
-  final String mode;
+  final String? mode;
   @override
-  final String dynamics;
+  final dynamic dynamics;
   @override
   @JsonKey(name: 'friendly_name')
   final String friendlyName;
@@ -746,25 +724,25 @@ class _$_Attributes implements _Attributes {
 abstract class _Attributes implements Attributes {
   const factory _Attributes(
       {@JsonKey(name: 'min_mireds')
-          required int minMireds,
+          int? minMireds,
       @JsonKey(name: 'max_mireds')
-          required int maxMireds,
+          int? maxMireds,
       @JsonKey(name: 'supported_color_modes')
-          required List<String> supportedColorModes,
+          List<String>? supportedColorModes,
       @JsonKey(name: 'color_mode')
           String? colorMode,
       @JsonKey(name: 'brightness', fromJson: roundToDouble)
-          required double brightness,
+          double? brightness,
       @JsonKey(name: 'color_temp')
-          required int colorTemp,
+          int? colorTemp,
       @JsonKey(name: 'hs_color')
-          required List<double> hsColor,
+          List<double>? hsColor,
       @JsonKey(name: 'rgb_color')
-          required List<int> rgbColor,
+          List<int>? rgbColor,
       @JsonKey(name: 'xy_color')
-          required List<double> xyColor,
-      required String mode,
-      required String dynamics,
+          List<double>? xyColor,
+      required String? mode,
+      required dynamic dynamics,
       @JsonKey(name: 'friendly_name')
           required String friendlyName,
       @JsonKey(name: 'supported_features')
@@ -775,35 +753,35 @@ abstract class _Attributes implements Attributes {
 
   @override
   @JsonKey(name: 'min_mireds')
-  int get minMireds;
+  int? get minMireds;
   @override
   @JsonKey(name: 'max_mireds')
-  int get maxMireds;
+  int? get maxMireds;
   @override
   @JsonKey(name: 'supported_color_modes')
-  List<String> get supportedColorModes;
+  List<String>? get supportedColorModes;
   @override
   @JsonKey(name: 'color_mode')
   String? get colorMode;
   @override
   @JsonKey(name: 'brightness', fromJson: roundToDouble)
-  double get brightness;
+  double? get brightness;
   @override
   @JsonKey(name: 'color_temp')
-  int get colorTemp;
+  int? get colorTemp;
   @override
   @JsonKey(name: 'hs_color')
-  List<double> get hsColor;
+  List<double>? get hsColor;
   @override
   @JsonKey(name: 'rgb_color')
-  List<int> get rgbColor;
+  List<int>? get rgbColor;
   @override
   @JsonKey(name: 'xy_color')
-  List<double> get xyColor;
+  List<double>? get xyColor;
   @override
-  String get mode;
+  String? get mode;
   @override
-  String get dynamics;
+  dynamic get dynamics;
   @override
   @JsonKey(name: 'friendly_name')
   String get friendlyName;

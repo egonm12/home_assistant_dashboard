@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class CustomThumbShape extends SliderComponentShape {
-  CustomThumbShape(
-      {this.elevation = 1.0,
-      this.pressedElevation = 6.0,
-      this.enabledThumbRadius = 10.0,
-      this.disabledThumbRadius = 10.0,
-      required this.animation});
+  CustomThumbShape({
+    this.elevation = 1.0,
+    this.pressedElevation = 6.0,
+    this.enabledThumbRadius = 10.0,
+    this.disabledThumbRadius = 10.0,
+    required this.animation,
+    required this.inactive,
+  });
 
   final double elevation;
   final double pressedElevation;
@@ -15,6 +17,7 @@ class CustomThumbShape extends SliderComponentShape {
   final double enabledThumbRadius;
   final double disabledThumbRadius;
   final Animation<double> animation;
+  final bool inactive;
 
   @override
   void paint(PaintingContext context, Offset center,
@@ -70,7 +73,8 @@ class CustomThumbShape extends SliderComponentShape {
         0,
         math.pi * 2,
       );
-    canvas.drawShadow(path, Colors.black, evaluatedElevation, true);
+    if (!inactive)
+      canvas.drawShadow(path, Colors.black, evaluatedElevation, true);
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(

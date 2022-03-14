@@ -5,11 +5,15 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
     required this.gradient,
     this.darkenInactive = true,
     required this.animation,
+    required this.inactive,
+    required this.theme,
   });
 
   final LinearGradient gradient;
   final bool darkenInactive;
   final Animation<double> animation;
+  final bool inactive;
+  final ThemeData theme;
 
   @override
   Rect getPreferredRect({
@@ -81,8 +85,7 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
     );
 
     final gradientColorTweenLeft = ColorTween(
-        begin: Colors.white.withOpacity(0.1),
-        end: Colors.white.withOpacity(0.0));
+        begin: Colors.white.withOpacity(0.1), end: Colors.white.withOpacity(1));
     final gradientColorTweenRight = ColorTween(
         begin: Colors.white.withOpacity(0.7),
         end: Colors.white.withOpacity(0.3));
@@ -101,10 +104,11 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
         begin: sliderTheme.disabledInactiveTrackColor,
         end: sliderTheme.inactiveTrackColor);
     final Paint activePaint = Paint()
-      ..shader = _gradient.createShader(activeGradientRect)
+      ..shader = inactive ? null : _gradient.createShader(activeGradientRect)
       ..color = activeTrackColorTween.evaluate(enableAnimation)!;
     final Paint inactivePaint = Paint()
       ..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
+
     final Paint leftTrackPaint;
     final Paint rightTrackPaint;
     switch (textDirection) {
@@ -117,34 +121,37 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
         rightTrackPaint = activePaint;
         break;
     }
+
+    final circularRadius =
+        Radius.circular((trackRect.height + additionalActiveTrackHeight) / 2);
     final Radius radius = Tween<Radius>(
-      begin: Radius.zero,
-      end:
-          Radius.circular((trackRect.height + additionalActiveTrackHeight) / 2),
+      begin: inactive ? circularRadius : Radius.zero,
+      end: circularRadius,
     ).evaluate(enableAnimation);
     final radiusReverse = Tween<Radius>(
-      begin:
-          Radius.circular((trackRect.height + additionalActiveTrackHeight) / 2),
-      end: Radius.zero,
+      begin: circularRadius,
+      end: inactive ? circularRadius : Radius.zero,
     );
     final Radius trackRadius = radius;
     final Radius activeTrackRadius = radius;
+    if (!inactive) {
+      context.canvas.drawRRect(
+        RRect.fromLTRBAndCorners(
+          trackRect.left,
+          (textDirection == TextDirection.ltr)
+              ? trackRect.top - (additionalActiveTrackHeight / 2)
+              : trackRect.top,
+          thumbCenter.dx,
+          (textDirection == TextDirection.ltr)
+              ? trackRect.bottom + (additionalActiveTrackHeight / 2)
+              : trackRect.bottom,
+          topLeft: radiusReverse.evaluate(animation),
+          bottomLeft: radiusReverse.evaluate(animation),
+        ),
+        leftTrackPaint,
+      );
+    }
 
-    context.canvas.drawRRect(
-      RRect.fromLTRBAndCorners(
-        trackRect.left,
-        (textDirection == TextDirection.ltr)
-            ? trackRect.top - (additionalActiveTrackHeight / 2)
-            : trackRect.top,
-        thumbCenter.dx,
-        (textDirection == TextDirection.ltr)
-            ? trackRect.bottom + (additionalActiveTrackHeight / 2)
-            : trackRect.bottom,
-        topLeft: radiusReverse.evaluate(animation),
-        bottomLeft: radiusReverse.evaluate(animation),
-      ),
-      leftTrackPaint,
-    );
     context.canvas.drawRRect(
       RRect.fromLTRBAndCorners(
         thumbCenter.dx,
@@ -161,6 +168,16 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
         bottomRight: (textDirection == TextDirection.rtl)
             ? activeTrackRadius
             : trackRadius,
+        bottomLeft: inactive
+            ? (textDirection == TextDirection.rtl)
+                ? activeTrackRadius
+                : trackRadius
+            : Radius.zero,
+        topLeft: inactive
+            ? (textDirection == TextDirection.rtl)
+                ? activeTrackRadius
+                : trackRadius
+            : Radius.zero,
       ),
       rightTrackPaint,
     );

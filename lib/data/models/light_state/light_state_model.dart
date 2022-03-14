@@ -22,19 +22,17 @@ class LightStateModel with _$LightStateModel {
 @freezed
 abstract class Attributes with _$Attributes {
   const factory Attributes({
-    @JsonKey(name: 'min_mireds') required int minMireds,
-    @JsonKey(name: 'max_mireds') required int maxMireds,
-    @JsonKey(name: 'supported_color_modes')
-        required List<String> supportedColorModes,
+    @JsonKey(name: 'min_mireds') int? minMireds,
+    @JsonKey(name: 'max_mireds') int? maxMireds,
+    @JsonKey(name: 'supported_color_modes') List<String>? supportedColorModes,
     @JsonKey(name: 'color_mode') String? colorMode,
-    @JsonKey(name: 'brightness', fromJson: roundToDouble)
-        required double brightness,
-    @JsonKey(name: 'color_temp') required int colorTemp,
-    @JsonKey(name: 'hs_color') required List<double> hsColor,
-    @JsonKey(name: 'rgb_color') required List<int> rgbColor,
-    @JsonKey(name: 'xy_color') required List<double> xyColor,
-    required String mode,
-    required String dynamics,
+    @JsonKey(name: 'brightness', fromJson: roundToDouble) double? brightness,
+    @JsonKey(name: 'color_temp') int? colorTemp,
+    @JsonKey(name: 'hs_color') List<double>? hsColor,
+    @JsonKey(name: 'rgb_color') List<int>? rgbColor,
+    @JsonKey(name: 'xy_color') List<double>? xyColor,
+    required String? mode,
+    required dynamic dynamics,
     @JsonKey(name: 'friendly_name') required String friendlyName,
     @JsonKey(name: 'supported_features') required int supportedFeatures,
   }) = _Attributes;

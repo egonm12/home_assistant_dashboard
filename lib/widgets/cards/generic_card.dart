@@ -6,8 +6,8 @@ import '../slider/custom_slider_track_shape.dart';
 import '../slider/custom_thumb_overlay_shape.dart';
 import '../slider/custom_thumb_shape.dart';
 
-class GenericCard extends StatefulWidget {
-  const GenericCard({
+class LightControlCard extends StatefulWidget {
+  const LightControlCard({
     Key? key,
     required this.iconData,
     required this.setBrightnessLevel,
@@ -19,24 +19,22 @@ class GenericCard extends StatefulWidget {
   final LightStateModel lightState;
 
   @override
-  State<GenericCard> createState() => _GenericCardState();
+  State<LightControlCard> createState() => _LightControlCardState();
 }
 
-class _GenericCardState extends State<GenericCard>
+class _LightControlCardState extends State<LightControlCard>
     with TickerProviderStateMixin {
-  double brightness = 20;
+  late double? brightness;
   bool isChangingBrightness = false;
   late final AnimationController _animationController = AnimationController(
-    duration: const Duration(milliseconds: 75),
+    duration: const Duration(milliseconds: 60),
     vsync: this,
   );
 
   @override
   void initState() {
     super.initState();
-    _animationController.addListener(() {
-      // print(_animationController.value);
-    });
+    brightness = widget.lightState.attributes.brightness;
   }
 
   @override
@@ -48,14 +46,17 @@ class _GenericCardState extends State<GenericCard>
   @override
   Widget build(BuildContext context) {
     final bool isTurnedOn = widget.lightState.state == DeviceState.on.name;
-    final List<int> rgbColor = widget.lightState.attributes.rgbColor;
-    final Color color = Color.fromRGBO(
-      rgbColor[0],
-      rgbColor[1],
-      rgbColor[2],
-      1,
-    );
-    final brightnessBalance = brightness / 255;
+    final List<int> rgbColor =
+        widget.lightState.attributes.rgbColor ?? [255, 200, 75];
+    final Color color = isTurnedOn
+        ? Color.fromRGBO(
+            rgbColor[0],
+            rgbColor[1],
+            rgbColor[2],
+            1,
+          )
+        : Theme.of(context).cardColor;
+    final brightnessBalance = brightness != null ? brightness! / 255 : 1;
     final brightnessPercentage = (brightnessBalance * 100).ceil();
 
     return ClipRRect(
@@ -73,19 +74,21 @@ class _GenericCardState extends State<GenericCard>
               color,
               color.withOpacity(0.3),
             ],
-            stops: [0.0, 0.8 + brightnessBalance],
+            stops: [0.0, 0.7 + brightnessBalance],
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.white,
-              offset: const Offset(
-                0,
-                -120,
-              ),
-              spreadRadius: 50.0 * brightnessBalance,
-              blurRadius: 50.0,
-            ),
-          ],
+          boxShadow: isTurnedOn
+              ? [
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: const Offset(
+                      0,
+                      -120,
+                    ),
+                    spreadRadius: 50.0 * brightnessBalance,
+                    blurRadius: 50.0,
+                  ),
+                ]
+              : null,
         ),
         child: Stack(
           children: [
@@ -99,9 +102,11 @@ class _GenericCardState extends State<GenericCard>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           AnimatedAlign(
-                            alignment: isChangingBrightness
-                                ? Alignment.center
-                                : Alignment.topCenter,
+                            alignment: brightness != null
+                                ? isChangingBrightness
+                                    ? Alignment.center
+                                    : Alignment.topCenter
+                                : Alignment.center,
                             duration: const Duration(milliseconds: 65),
                             child: Row(
                               children: [
@@ -135,7 +140,9 @@ class _GenericCardState extends State<GenericCard>
                           ),
                           if (!isChangingBrightness)
                             Align(
-                              alignment: Alignment.topCenter,
+                              alignment: brightness != null
+                                  ? Alignment.topCenter
+                                  : Alignment.center,
                               child: SizedBox(
                                 height: 35,
                                 child: CustomSwitch(
@@ -149,34 +156,39 @@ class _GenericCardState extends State<GenericCard>
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: isChangingBrightness ? 0.0 : 16.0,
-                    vertical: isChangingBrightness ? 0.0 : 16.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: isChangingBrightness
-                        ? MainAxisAlignment.center
-                        : MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        height: 20,
-                        child: AnimatedBuilder(
-                          animation: _animationController,
-                          builder: (_, __) => SliderTheme(
+                if (brightness != null)
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: isChangingBrightness ? 0.0 : 16.0,
+                      vertical: isChangingBrightness ? 0.0 : 16.0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: isChangingBrightness
+                          ? MainAxisAlignment.center
+                          : MainAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          height: 20,
+                          child: SliderTheme(
                             data: SliderThemeData(
-                              disabledInactiveTrackColor: Colors.blue,
+                              disabledThumbColor: Colors.transparent,
+                              disabledActiveTrackColor: Theme.of(context)
+                                  .backgroundColor
+                                  .withOpacity(0.75),
+                              disabledInactiveTrackColor: Theme.of(context)
+                                  .backgroundColor
+                                  .withOpacity(0.75),
                               inactiveTrackColor:
                                   Colors.white.withOpacity(0.15),
                               trackShape: CustomSliderTrackShape(
+                                inactive: !isTurnedOn,
+                                theme: Theme.of(context),
                                 animation: _animationController.view,
                                 gradient: LinearGradient(
                                   colors: [
-                                    Theme.of(context)
-                                        .highlightColor
-                                        .withOpacity(
-                                          0.9,
-                                        ),
+                                    Colors.white.withOpacity(
+                                      0.9,
+                                    ),
                                     Colors.white.withOpacity(
                                       1.0,
                                     ),
@@ -189,37 +201,42 @@ class _GenericCardState extends State<GenericCard>
                               ),
                               overlayColor: Colors.transparent,
                               thumbShape: CustomThumbShape(
+                                inactive: !isTurnedOn,
                                 animation: _animationController.view,
                                 enabledThumbRadius: 60,
                               ),
+                              thumbColor: isTurnedOn
+                                  ? Colors.white
+                                  : Colors.transparent,
                             ),
                             child: Slider(
                               max: 255,
                               min: 1,
-                              value: brightness,
-                              onChanged: (value) => setState(() {
-                                brightness = value;
-                              }),
+                              value: isTurnedOn ? brightness ?? 1 : 1,
+                              onChanged: isTurnedOn
+                                  ? (value) => setState(() {
+                                        brightness = value;
+                                      })
+                                  : null,
                               onChangeStart: (_) => setState(() {
                                 isChangingBrightness = true;
-                                _animationController.animateTo(120);
+                                _animationController.animateTo(1.0);
                               }),
                               onChangeEnd: (_) => setState(() {
                                 isChangingBrightness = false;
-                                _animationController.animateTo(0);
+                                _animationController.animateTo(0.0);
                               }),
-                              thumbColor: Colors.white,
-                              activeColor: color,
+                              activeColor:
+                                  color.withOpacity(isTurnedOn ? 1.0 : 0.2),
                               inactiveColor: isChangingBrightness
                                   ? Colors.transparent
                                   : null,
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
               ],
             ),
           ],
