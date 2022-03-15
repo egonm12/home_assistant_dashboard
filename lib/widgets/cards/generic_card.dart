@@ -172,6 +172,7 @@ class _LightControlCardState extends State<LightControlCard>
                           child: SliderTheme(
                             data: SliderThemeData(
                               disabledThumbColor: Colors.transparent,
+                              thumbColor: Colors.white,
                               disabledActiveTrackColor: Theme.of(context)
                                   .backgroundColor
                                   .withOpacity(0.75),
@@ -205,9 +206,6 @@ class _LightControlCardState extends State<LightControlCard>
                                 animation: _animationController.view,
                                 enabledThumbRadius: 60,
                               ),
-                              thumbColor: isTurnedOn
-                                  ? Colors.white
-                                  : Colors.transparent,
                             ),
                             child: Slider(
                               max: 255,
@@ -226,8 +224,6 @@ class _LightControlCardState extends State<LightControlCard>
                                 isChangingBrightness = false;
                                 _animationController.animateTo(0.0);
                               }),
-                              activeColor:
-                                  color.withOpacity(isTurnedOn ? 1.0 : 0.2),
                               inactiveColor: isChangingBrightness
                                   ? Colors.transparent
                                   : null,

@@ -20,17 +20,20 @@ class CustomThumbShape extends SliderComponentShape {
   final bool inactive;
 
   @override
-  void paint(PaintingContext context, Offset center,
-      {required Animation<double> activationAnimation,
-      required Animation<double> enableAnimation,
-      required bool isDiscrete,
-      required TextPainter labelPainter,
-      required RenderBox parentBox,
-      required SliderThemeData sliderTheme,
-      required TextDirection textDirection,
-      required double value,
-      required double textScaleFactor,
-      required Size sizeWithOverflow}) {
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    required bool isDiscrete,
+    required TextPainter labelPainter,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required TextDirection textDirection,
+    required double value,
+    required double textScaleFactor,
+    required Size sizeWithOverflow,
+  }) {
     assert(context != null);
     assert(center != null);
     assert(enableAnimation != null);
@@ -73,8 +76,9 @@ class CustomThumbShape extends SliderComponentShape {
         0,
         math.pi * 2,
       );
-    if (!inactive)
+    if (!inactive) {
       canvas.drawShadow(path, Colors.black, evaluatedElevation, true);
+    }
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(

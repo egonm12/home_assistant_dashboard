@@ -10,7 +10,7 @@ void main() {
 
 final data = {
   "entity_id": "light.woonkamer",
-  "state": "off",
+  "state": "on",
   "attributes": {
     "min_mireds": 153,
     "max_mireds": 500,

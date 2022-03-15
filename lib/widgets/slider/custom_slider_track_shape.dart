@@ -85,7 +85,8 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
     );
 
     final gradientColorTweenLeft = ColorTween(
-        begin: Colors.white.withOpacity(0.1), end: Colors.white.withOpacity(1));
+        begin: Colors.white.withOpacity(0.1),
+        end: Colors.white.withOpacity(0.0));
     final gradientColorTweenRight = ColorTween(
         begin: Colors.white.withOpacity(0.7),
         end: Colors.white.withOpacity(0.3));
