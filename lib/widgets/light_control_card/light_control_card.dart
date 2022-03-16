@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:home_assistant_dashboard/data/models/light_state/light_state_model.dart';
-import 'package:home_assistant_dashboard/widgets/cards/switch.dart';
+import 'package:home_assistant_dashboard/widgets/switch/switch.dart';
 
-import '../slider/custom_slider_track_shape.dart';
-import '../slider/custom_thumb_overlay_shape.dart';
-import '../slider/custom_thumb_shape.dart';
+import 'slider/custom_slider_track_shape.dart';
+import 'slider/custom_thumb_overlay_shape.dart';
+import 'slider/custom_thumb_shape.dart';
 import 'utils.dart';
 
 final dataOn = {
@@ -71,10 +71,12 @@ class LightControlCard extends HookWidget {
   const LightControlCard({
     Key? key,
     required this.iconData,
+    required this.entityId,
     required this.setBrightnessLevel,
   }) : super(key: key);
 
   final IconData iconData;
+  final String entityId;
   final Function(double brightness) setBrightnessLevel;
 
   @override
