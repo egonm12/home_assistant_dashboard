@@ -5,10 +5,12 @@ class CustomSwitch extends StatelessWidget {
   const CustomSwitch({
     Key? key,
     required this.value,
+    this.duration = const Duration(milliseconds: 200),
     required this.onToggle,
   }) : super(key: key);
 
   final bool value;
+  final Duration duration;
   final Function(bool value) onToggle;
 
   @override
@@ -20,6 +22,7 @@ class CustomSwitch extends StatelessWidget {
       // toggleColor: Colors.red,
       onToggle: onToggle,
       value: value,
+      duration: duration,
     );
   }
 }

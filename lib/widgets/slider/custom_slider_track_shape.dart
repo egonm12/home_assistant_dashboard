@@ -23,8 +23,9 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
     bool isEnabled = false,
     bool isDiscrete = false,
   }) {
-    final double trackHeight = Tween<double>(begin: 8, end: 120)
-        .evaluate(animation); // sliderTheme.trackHeight ?? 8;
+    final double trackHeight =
+        Tween<double>(begin: 8, end: sliderTheme.trackHeight)
+            .evaluate(animation);
     final double trackLeft =
         Tween<double>(begin: offset.dx, end: offset.dx + 9).evaluate(animation);
     final double trackTop =
@@ -37,15 +38,18 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
   }
 
   @override
-  void paint(PaintingContext context, Offset offset,
-      {required RenderBox parentBox,
-      required SliderThemeData sliderTheme,
-      required Animation<double> enableAnimation,
-      required TextDirection textDirection,
-      required Offset thumbCenter,
-      bool isDiscrete = false,
-      bool isEnabled = false,
-      double additionalActiveTrackHeight = 2}) {
+  void paint(
+    PaintingContext context,
+    Offset offset, {
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required Animation<double> enableAnimation,
+    required TextDirection textDirection,
+    required Offset thumbCenter,
+    bool isDiscrete = false,
+    bool isEnabled = false,
+    double additionalActiveTrackHeight = 2,
+  }) {
     assert(context != null);
     assert(offset != null);
     assert(parentBox != null);

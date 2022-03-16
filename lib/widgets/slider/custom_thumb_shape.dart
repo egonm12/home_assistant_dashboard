@@ -43,8 +43,8 @@ class CustomThumbShape extends SliderComponentShape {
 
     final Canvas canvas = context.canvas;
 
-    final thumbRadius =
-        Tween<double>(begin: 20, end: 60).evaluate(activationAnimation);
+    final thumbRadius = Tween<double>(begin: 20, end: enabledThumbRadius)
+        .evaluate(activationAnimation);
 
     final Tween<double> radiusTween = Tween<double>(
       begin: thumbRadius,
