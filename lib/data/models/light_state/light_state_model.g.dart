@@ -35,7 +35,7 @@ _$_Attributes _$$_AttributesFromJson(Map<String, dynamic> json) =>
           ?.map((e) => e as String)
           .toList(),
       colorMode: json['color_mode'] as String?,
-      brightness: roundToDouble(json['brightness'] as int?),
+      brightness: roundToDouble(json['brightness'] as num?),
       colorTemp: json['color_temp'] as int?,
       hsColor: (json['hs_color'] as List<dynamic>?)
           ?.map((e) => (e as num).toDouble())

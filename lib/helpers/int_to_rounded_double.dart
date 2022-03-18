@@ -1,1 +1,1 @@
-double? roundToDouble(int? value) => value?.roundToDouble();
+double? roundToDouble(num? value) => value?.roundToDouble();

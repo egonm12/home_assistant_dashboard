@@ -2,69 +2,92 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:home_assistant_dashboard/data/models/light_state/light_state_model.dart';
 import 'package:home_assistant_dashboard/widgets/switch/switch.dart';
-
+import 'package:home_assistant_dart/home_assistant_dart.dart';
 import 'slider/custom_slider_track_shape.dart';
 import 'slider/custom_thumb_overlay_shape.dart';
 import 'slider/custom_thumb_shape.dart';
 import 'utils.dart';
 
-final dataOn = {
-  "entity_id": "light.hue_go_1",
-  "state": "on",
-  "attributes": {
-    "min_mireds": 153,
-    "max_mireds": 500,
-    "supported_color_modes": ["color_temp", "xy"],
-    "color_mode": "color_temp",
-    "brightness": 153,
-    "color_temp": 454,
-    "hs_color": [29.79, 84.553],
-    "rgb_color": [255, 147, 44],
-    "xy_color": [0.579, 0.388],
-    "mode": "normal",
-    "dynamics": "none",
-    "friendly_name": "Livingroom",
-    "supported_features": 40
-  },
-  "last_changed": "2022-03-06T17:29:46.143123+00:00",
-  "last_updated": "2022-03-06T17:29:47.118813+00:00",
-  "context": {
-    "id": "a4998cd100756a79836adf8e34ef8f37",
-    "parent_id": null,
-    "user_id": null
-  }
-};
-final dataOff = {
-  "entity_id": "light.hue_go_1",
-  "state": "off",
-  "attributes": {
-    "min_mireds": 153,
-    "max_mireds": 500,
-    "brightness": 1,
-    "supported_color_modes": ["color_temp", "xy"],
-    "color_mode": "color_temp",
-    "mode": "normal",
-    "dynamics": "none",
-    "friendly_name": "Livingroom",
-    "supported_features": 40
-  },
-  "last_changed": "2022-03-06T17:29:46.143123+00:00",
-  "last_updated": "2022-03-06T17:29:47.118813+00:00",
-  "context": {
-    "id": "a4998cd100756a79836adf8e34ef8f37",
-    "parent_id": null,
-    "user_id": null
-  }
-};
+final remote = HomeAssistantDart(
+  token:
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NWQxNzk4MDFlMzA0N2UzYjllNzkxOTYyYmIzYzllMSIsImlhdCI6MTY0NjUxODE5NywiZXhwIjoxOTYxODc4MTk3fQ.dgBl7bs1OECB0KWoC9S_6-DvrilAsvMpeogLk74RObA',
+  baseUrl: 'https://meijers-hassio.duckdns.org:8123/api',
+);
 
 Future<LightStateModel> getLightState(String entityId) async {
-  return await Future.value(LightStateModel.fromJson(dataOff));
+  try {
+    final state = await remote.getState(entityId);
+
+    return LightStateModel.fromJson(state);
+  } catch (e) {
+    throw Exception(e);
+  }
 }
 
-Future<LightStateModel> setLightState(String entityId, DeviceState deviceState,
+Future<LightStateModel> _setLightState(
+  String entityId,
+  DeviceState deviceState,
+  LightStateModel lightState,
+) async {
+  try {
+    final state = await remote.setState(
+      entityId,
+      deviceState.name,
+      lightState.attributes.toJson(),
+    );
+
+    return LightStateModel.fromJson(state);
+  } catch (e) {
+    throw Exception(e);
+  }
+}
+
+Future<LightStateModel> switchLight(String entityId, DeviceState deviceState,
     LightStateModel lightState) async {
-  return await Future.value(LightStateModel.fromJson(
-      deviceState == DeviceState.on ? dataOn : dataOff));
+  try {
+    await remote.callService(
+      'light',
+      deviceState == DeviceState.on ? 'turn_on' : 'turn_off',
+      {
+        'entity_id': entityId,
+      },
+    );
+
+    return await _setLightState(
+      entityId,
+      deviceState,
+      lightState,
+    );
+  } catch (e) {
+    throw Exception(e);
+  }
+}
+
+Future<LightStateModel> setLightState(
+  String entityId,
+  DeviceState deviceState,
+  LightStateModel lightState,
+) async {
+  try {
+    await remote.callService(
+      'light',
+      deviceState == DeviceState.on ? 'turn_on' : 'turn_off',
+      {
+        'entity_id': entityId,
+        'brightness': deviceState == DeviceState.on
+            ? lightState.attributes.brightness
+            : null,
+      },
+    );
+
+    return await _setLightState(
+      entityId,
+      deviceState,
+      lightState,
+    );
+  } catch (e) {
+    throw Exception(e);
+  }
 }
 
 class LightControlCard extends HookWidget {
@@ -72,12 +95,10 @@ class LightControlCard extends HookWidget {
     Key? key,
     required this.iconData,
     required this.entityId,
-    required this.setBrightnessLevel,
   }) : super(key: key);
 
   final IconData iconData;
   final String entityId;
-  final Function(double brightness) setBrightnessLevel;
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +108,8 @@ class LightControlCard extends HookWidget {
     final ValueNotifier<Color> thumbColor = useState(Colors.white);
 
     final bool isTurnedOn = lightState.value?.state == DeviceState.on.name;
+    final bool isBrightnessSupported =
+        lightState.value?.attributes.supportedFeatures != 0;
 
     final _sliderAnimationController = useAnimationController(
         duration: LightControlUtils.sliderAnimationDuration);
@@ -108,6 +131,13 @@ class LightControlCard extends HookWidget {
       thumbColor.value = isTurnedOn ? Colors.white : Colors.transparent;
       return null;
     }, [isTurnedOn]);
+
+    useEffect(() {
+      if (brightness.value != null) {
+        _sliderValueAnimationController.value = brightness.value!;
+      }
+      return null;
+    }, [brightness.value]);
 
     final List<int> rgbColor = lightState.value?.attributes.rgbColor ??
         LightControlUtils.defaultRGBColor;
@@ -207,7 +237,7 @@ class LightControlCard extends HookWidget {
                           ),
                           if (!isChangingBrightness.value)
                             Align(
-                              alignment: brightness.value != null
+                              alignment: isBrightnessSupported
                                   ? Alignment.topCenter
                                   : Alignment.center,
                               child: SizedBox(
@@ -217,12 +247,14 @@ class LightControlCard extends HookWidget {
                                   duration: LightControlUtils
                                       .sliderValueAnimationDuration,
                                   onToggle: (value) async {
-                                    final newLightState = await setLightState(
+                                    final newLightState = await switchLight(
                                       entityId,
                                       value ? DeviceState.on : DeviceState.off,
                                       lightState.value!,
                                     );
                                     lightState.value = newLightState;
+                                    brightness.value =
+                                        newLightState.attributes.brightness;
                                     if (value) {
                                       _sliderValueAnimationController.animateTo(
                                         lightState
@@ -240,7 +272,7 @@ class LightControlCard extends HookWidget {
                     ],
                   ),
                 ),
-                if (brightness.value != null)
+                if (isBrightnessSupported)
                   Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: isChangingBrightness.value ? 0.0 : 16.0,
@@ -302,13 +334,15 @@ class LightControlCard extends HookWidget {
                                 onChanged: isTurnedOn
                                     ? (value) async {
                                         brightness.value = value;
-                                        _sliderValueAnimationController.value =
-                                            value;
                                         final newLightState =
                                             await setLightState(
                                           entityId,
                                           DeviceState.on,
-                                          lightState.value!,
+                                          lightState.value!.copyWith(
+                                            attributes: lightState
+                                                .value!.attributes
+                                                .copyWith(brightness: value),
+                                          ),
                                         );
 
                                         lightState.value = newLightState;
