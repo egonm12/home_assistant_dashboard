@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:home_assistant_dashboard/data/models/light_state/light_state_model.dart';
 import 'package:home_assistant_dashboard/widgets/switch/switch.dart';
@@ -9,9 +10,8 @@ import 'slider/custom_thumb_shape.dart';
 import 'utils.dart';
 
 final remote = HomeAssistantDart(
-  token:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NWQxNzk4MDFlMzA0N2UzYjllNzkxOTYyYmIzYzllMSIsImlhdCI6MTY0NjUxODE5NywiZXhwIjoxOTYxODc4MTk3fQ.dgBl7bs1OECB0KWoC9S_6-DvrilAsvMpeogLk74RObA',
-  baseUrl: 'https://meijers-hassio.duckdns.org:8123/api',
+  token: dotenv.get('API_ACCESS_TOKEN'),
+  baseUrl: dotenv.get('API_BASE_URL'),
 );
 
 Future<LightStateModel> getLightState(String entityId) async {

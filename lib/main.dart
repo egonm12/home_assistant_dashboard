@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:home_assistant_dashboard/presentation/light_control/light_control_screen.dart';
 import 'package:home_assistant_dashboard/theme/theme.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load();
   runApp(const MyApp());
 }
 
