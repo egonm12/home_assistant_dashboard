@@ -139,6 +139,7 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
     );
     final Radius trackRadius = radius;
     final Radius activeTrackRadius = radius;
+
     if (!inactive) {
       context.canvas.drawRRect(
         RRect.fromLTRBAndCorners(
@@ -159,7 +160,7 @@ class CustomSliderTrackShape extends RoundedRectSliderTrackShape {
 
     context.canvas.drawRRect(
       RRect.fromLTRBAndCorners(
-        thumbCenter.dx,
+        inactive ? 0 : thumbCenter.dx,
         (textDirection == TextDirection.rtl)
             ? trackRect.top - (additionalActiveTrackHeight / 2)
             : trackRect.top,
