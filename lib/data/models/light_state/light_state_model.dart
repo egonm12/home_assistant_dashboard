@@ -31,10 +31,10 @@ abstract class Attributes with _$Attributes {
     @JsonKey(name: 'hs_color') List<double>? hsColor,
     @JsonKey(name: 'rgb_color') List<int>? rgbColor,
     @JsonKey(name: 'xy_color') List<double>? xyColor,
-    required String? mode,
-    required dynamic dynamics,
-    @JsonKey(name: 'friendly_name') required String friendlyName,
-    @JsonKey(name: 'supported_features') required int supportedFeatures,
+    String? mode,
+    dynamic dynamics,
+    @JsonKey(name: 'friendly_name') String? friendlyName,
+    @JsonKey(name: 'supported_features') int? supportedFeatures,
   }) = _Attributes;
 
   factory Attributes.fromJson(Map<String, dynamic> json) =>

@@ -13,11 +13,12 @@ class LightControlContainer extends HookWidget {
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              LightControlCard(
-                iconData: Icons.lightbulb,
-                entityId: 'light.woonkamer',
-              )
+            children: [
+              LightControlCard.create(
+                context,
+                Icons.lightbulb,
+                'light.hue_lightstrip_werkkamer',
+              ),
             ],
           )
         ],

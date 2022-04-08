@@ -336,10 +336,10 @@ class _$AttributesTearOff {
       @JsonKey(name: 'hs_color') List<double>? hsColor,
       @JsonKey(name: 'rgb_color') List<int>? rgbColor,
       @JsonKey(name: 'xy_color') List<double>? xyColor,
-      required String? mode,
-      required dynamic dynamics,
-      @JsonKey(name: 'friendly_name') required String friendlyName,
-      @JsonKey(name: 'supported_features') required int supportedFeatures}) {
+      String? mode,
+      dynamic dynamics,
+      @JsonKey(name: 'friendly_name') String? friendlyName,
+      @JsonKey(name: 'supported_features') int? supportedFeatures}) {
     return _Attributes(
       minMireds: minMireds,
       maxMireds: maxMireds,
@@ -388,9 +388,9 @@ mixin _$Attributes {
   String? get mode => throw _privateConstructorUsedError;
   dynamic get dynamics => throw _privateConstructorUsedError;
   @JsonKey(name: 'friendly_name')
-  String get friendlyName => throw _privateConstructorUsedError;
+  String? get friendlyName => throw _privateConstructorUsedError;
   @JsonKey(name: 'supported_features')
-  int get supportedFeatures => throw _privateConstructorUsedError;
+  int? get supportedFeatures => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -415,8 +415,8 @@ abstract class $AttributesCopyWith<$Res> {
       @JsonKey(name: 'xy_color') List<double>? xyColor,
       String? mode,
       dynamic dynamics,
-      @JsonKey(name: 'friendly_name') String friendlyName,
-      @JsonKey(name: 'supported_features') int supportedFeatures});
+      @JsonKey(name: 'friendly_name') String? friendlyName,
+      @JsonKey(name: 'supported_features') int? supportedFeatures});
 }
 
 /// @nodoc
@@ -491,11 +491,11 @@ class _$AttributesCopyWithImpl<$Res> implements $AttributesCopyWith<$Res> {
       friendlyName: friendlyName == freezed
           ? _value.friendlyName
           : friendlyName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       supportedFeatures: supportedFeatures == freezed
           ? _value.supportedFeatures
           : supportedFeatures // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -518,8 +518,8 @@ abstract class _$AttributesCopyWith<$Res> implements $AttributesCopyWith<$Res> {
       @JsonKey(name: 'xy_color') List<double>? xyColor,
       String? mode,
       dynamic dynamics,
-      @JsonKey(name: 'friendly_name') String friendlyName,
-      @JsonKey(name: 'supported_features') int supportedFeatures});
+      @JsonKey(name: 'friendly_name') String? friendlyName,
+      @JsonKey(name: 'supported_features') int? supportedFeatures});
 }
 
 /// @nodoc
@@ -596,11 +596,11 @@ class __$AttributesCopyWithImpl<$Res> extends _$AttributesCopyWithImpl<$Res>
       friendlyName: friendlyName == freezed
           ? _value.friendlyName
           : friendlyName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       supportedFeatures: supportedFeatures == freezed
           ? _value.supportedFeatures
           : supportedFeatures // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -618,10 +618,10 @@ class _$_Attributes implements _Attributes {
       @JsonKey(name: 'hs_color') this.hsColor,
       @JsonKey(name: 'rgb_color') this.rgbColor,
       @JsonKey(name: 'xy_color') this.xyColor,
-      required this.mode,
-      required this.dynamics,
-      @JsonKey(name: 'friendly_name') required this.friendlyName,
-      @JsonKey(name: 'supported_features') required this.supportedFeatures});
+      this.mode,
+      this.dynamics,
+      @JsonKey(name: 'friendly_name') this.friendlyName,
+      @JsonKey(name: 'supported_features') this.supportedFeatures});
 
   factory _$_Attributes.fromJson(Map<String, dynamic> json) =>
       _$$_AttributesFromJson(json);
@@ -659,10 +659,10 @@ class _$_Attributes implements _Attributes {
   final dynamic dynamics;
   @override
   @JsonKey(name: 'friendly_name')
-  final String friendlyName;
+  final String? friendlyName;
   @override
   @JsonKey(name: 'supported_features')
-  final int supportedFeatures;
+  final int? supportedFeatures;
 
   @override
   String toString() {
@@ -741,12 +741,12 @@ abstract class _Attributes implements Attributes {
           List<int>? rgbColor,
       @JsonKey(name: 'xy_color')
           List<double>? xyColor,
-      required String? mode,
-      required dynamic dynamics,
+      String? mode,
+      dynamic dynamics,
       @JsonKey(name: 'friendly_name')
-          required String friendlyName,
+          String? friendlyName,
       @JsonKey(name: 'supported_features')
-          required int supportedFeatures}) = _$_Attributes;
+          int? supportedFeatures}) = _$_Attributes;
 
   factory _Attributes.fromJson(Map<String, dynamic> json) =
       _$_Attributes.fromJson;
@@ -784,10 +784,10 @@ abstract class _Attributes implements Attributes {
   dynamic get dynamics;
   @override
   @JsonKey(name: 'friendly_name')
-  String get friendlyName;
+  String? get friendlyName;
   @override
   @JsonKey(name: 'supported_features')
-  int get supportedFeatures;
+  int? get supportedFeatures;
   @override
   @JsonKey(ignore: true)
   _$AttributesCopyWith<_Attributes> get copyWith =>

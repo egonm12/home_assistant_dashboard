@@ -47,8 +47,8 @@ _$_Attributes _$$_AttributesFromJson(Map<String, dynamic> json) =>
           .toList(),
       mode: json['mode'] as String?,
       dynamics: json['dynamics'],
-      friendlyName: json['friendly_name'] as String,
-      supportedFeatures: json['supported_features'] as int,
+      friendlyName: json['friendly_name'] as String?,
+      supportedFeatures: json['supported_features'] as int?,
     );
 
 Map<String, dynamic> _$$_AttributesToJson(_$_Attributes instance) =>
