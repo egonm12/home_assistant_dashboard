@@ -6,13 +6,12 @@ import 'package:home_assistant_dashboard/features/lights/light_state.dart';
 import 'package:home_assistant_dashboard/features/lights/light_model.dart';
 import 'package:home_assistant_dashboard/widgets/light_control_card/animated_slider/animated_slider.dart';
 import 'package:home_assistant_dashboard/widgets/light_control_card/animated_text/animated_text.dart';
+import 'package:home_assistant_dashboard/widgets/light_control_card/card_shimmer/card_shimmer.dart';
 import 'package:home_assistant_dashboard/widgets/switch/switch.dart';
 import 'package:provider/provider.dart';
 import '../../data/repositories/lights/lights_repository.dart';
 import '../../helpers/throttle.dart';
-import 'custom_slider_shape/custom_slider_track_shape.dart';
-import 'custom_slider_shape/custom_thumb_overlay_shape.dart';
-import 'custom_slider_shape/custom_thumb_shape.dart';
+
 import 'utils.dart';
 
 final thr = Throttling(duration: const Duration(milliseconds: 125));
@@ -94,127 +93,130 @@ class LightControlCard extends HookWidget {
 
     final brightnessBalance =
         LightControlUtils.brightnessBalance(brightness.value);
-    final brightnessPercentage =
-        LightControlUtils.brightnessPercentage(brightnessBalance);
 
     return ClipRRect(
       borderRadius: const BorderRadius.all(
         Radius.circular(8),
       ),
-      child: Container(
-        height: LightControlUtils.height,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              color,
-              color.withOpacity(0.3),
-            ],
-            stops: [0.0, 0.7 + brightnessBalance],
-          ),
-          boxShadow: isTurnedOn.value
-              ? [
-                  BoxShadow(
-                    color: Colors.white,
-                    offset: const Offset(
-                      0,
-                      -120,
-                    ),
-                    spreadRadius:
-                        LightControlUtils.boxShadowRadius * brightnessBalance,
-                    blurRadius: LightControlUtils.boxShadowRadius,
-                  ),
-                ]
-              : null,
-        ),
-        child: Stack(
-          children: [
-            Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Stack(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          AnimatedText(
-                            isChangingBrightness: isChangingBrightness.value,
-                            brightnessBalance: brightnessBalance,
-                            iconData: iconData,
-                            isTurnedOn: isTurnedOn.value,
+      child: _lightState.value == null
+          ? const CardShimmer()
+          : Container(
+              height: LightControlUtils.height,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    color,
+                    color.withOpacity(0.3),
+                  ],
+                  stops: [0.0, 0.7 + brightnessBalance],
+                ),
+                boxShadow: isTurnedOn.value
+                    ? [
+                        BoxShadow(
+                          color: Colors.white,
+                          offset: const Offset(
+                            0,
+                            -120,
                           ),
-                          if (!isChangingBrightness.value)
-                            Align(
-                              alignment: isBrightnessSupported
-                                  ? Alignment.topCenter
-                                  : Alignment.center,
-                              child: SizedBox(
-                                height: 35,
-                                child: CustomSwitch(
-                                  value: isTurnedOn.value,
-                                  duration: LightControlUtils
-                                      .sliderValueAnimationDuration,
-                                  onToggle: (value) async {
-                                    await context
-                                        .read<LightModel>()
-                                        .setLightState(
-                                          entityId,
-                                          value
-                                              ? DeviceState.on
-                                              : DeviceState.off,
-                                          _lightState.value!,
-                                        );
-                                    if (value) {
-                                      _sliderValueAnimationController.animateTo(
-                                        _lightState
-                                            .value!.attributes.brightness!,
-                                      );
-                                    } else {
-                                      _sliderValueAnimationController.value = 1;
-                                    }
-                                  },
+                          spreadRadius: LightControlUtils.boxShadowRadius *
+                              brightnessBalance,
+                          blurRadius: LightControlUtils.boxShadowRadius,
+                        ),
+                      ]
+                    : null,
+              ),
+              child: Stack(
+                children: [
+                  Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Stack(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AnimatedText(
+                                  isChangingBrightness:
+                                      isChangingBrightness.value,
+                                  brightnessBalance: brightnessBalance,
+                                  iconData: iconData,
+                                  isTurnedOn: isTurnedOn.value,
+                                ),
+                                if (!isChangingBrightness.value)
+                                  Align(
+                                    alignment: isBrightnessSupported
+                                        ? Alignment.topCenter
+                                        : Alignment.center,
+                                    child: SizedBox(
+                                      height: 35,
+                                      child: CustomSwitch(
+                                        value: isTurnedOn.value,
+                                        duration: LightControlUtils
+                                            .sliderValueAnimationDuration,
+                                        onToggle: (value) async {
+                                          await context
+                                              .read<LightModel>()
+                                              .setLightState(
+                                                entityId,
+                                                value
+                                                    ? DeviceState.on
+                                                    : DeviceState.off,
+                                                _lightState.value!,
+                                              );
+                                          if (value) {
+                                            _sliderValueAnimationController
+                                                .animateTo(
+                                              _lightState.value!.attributes
+                                                  .brightness!,
+                                            );
+                                          } else {
+                                            _sliderValueAnimationController
+                                                .value = 1;
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (isBrightnessSupported)
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: isChangingBrightness.value ? 0.0 : 16.0,
+                            vertical: isChangingBrightness.value ? 0.0 : 16.0,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: isChangingBrightness.value
+                                ? MainAxisAlignment.center
+                                : MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                height: 20,
+                                child: AnimatedSlider(
+                                  entityId: entityId,
+                                  disabled: !isTurnedOn.value,
+                                  lightState: _lightState.value!,
+                                  isChangingBrightness: isChangingBrightness,
+                                  brightness: brightness,
+                                  sliderValueAnimationController:
+                                      _sliderValueAnimationController,
                                 ),
                               ),
-                            ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                if (isBrightnessSupported)
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: isChangingBrightness.value ? 0.0 : 16.0,
-                      vertical: isChangingBrightness.value ? 0.0 : 16.0,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: isChangingBrightness.value
-                          ? MainAxisAlignment.center
-                          : MainAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                          height: 20,
-                          child: AnimatedSlider(
-                            entityId: entityId,
-                            disabled: !isTurnedOn.value,
-                            lightState: _lightState.value!,
-                            isChangingBrightness: isChangingBrightness,
-                            brightness: brightness,
-                            sliderValueAnimationController:
-                                _sliderValueAnimationController,
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                    ],
                   ),
-              ],
+                ],
+              ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }

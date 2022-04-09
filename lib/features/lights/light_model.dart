@@ -17,6 +17,7 @@ class LightModel extends StateNotifier<LightState> {
   final LightsRepository lightsRepository;
 
   Future<void> getLightState(String entityId) async {
+    await Future.delayed(const Duration(seconds: 2));
     state = state.copyWith(getLightState: const GetLightState.inProgress());
     try {
       final lightState = await lightsRepository.getLightState(entityId);
