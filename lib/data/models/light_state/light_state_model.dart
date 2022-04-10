@@ -5,23 +5,8 @@ part 'light_state_model.freezed.dart';
 part 'light_state_model.g.dart';
 
 @freezed
-class LightStateModel with _$LightStateModel {
-  const factory LightStateModel({
-    @JsonKey(name: 'entity_id') required String entityId,
-    required String state,
-    required Attributes attributes,
-    @JsonKey(name: 'last_changed') required DateTime lastChanged,
-    @JsonKey(name: 'last_updated') required DateTime lastUpdated,
-    required Context context,
-  }) = _LightStateModel;
-
-  factory LightStateModel.fromJson(Map<String, dynamic> json) =>
-      _$LightStateModelFromJson(json);
-}
-
-@freezed
-abstract class Attributes with _$Attributes {
-  const factory Attributes({
+abstract class LightStateAttributes with _$LightStateAttributes {
+  const factory LightStateAttributes({
     @JsonKey(name: 'min_mireds') int? minMireds,
     @JsonKey(name: 'max_mireds') int? maxMireds,
     @JsonKey(name: 'supported_color_modes') List<String>? supportedColorModes,
@@ -37,18 +22,6 @@ abstract class Attributes with _$Attributes {
     @JsonKey(name: 'supported_features') int? supportedFeatures,
   }) = _Attributes;
 
-  factory Attributes.fromJson(Map<String, dynamic> json) =>
-      _$AttributesFromJson(json);
-}
-
-@freezed
-abstract class Context with _$Context {
-  const factory Context({
-    required String id,
-    @JsonKey(name: 'parent_id') String? parentId,
-    @JsonKey(name: 'user_id') String? userId,
-  }) = _Context;
-
-  factory Context.fromJson(Map<String, dynamic> json) =>
-      _$ContextFromJson(json);
+  factory LightStateAttributes.fromJson(Map<String, dynamic> json) =>
+      _$LightStateAttributesFromJson(json);
 }

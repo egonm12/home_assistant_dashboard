@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'package:home_assistant_dashboard/data/models/entity_state/entity_state_model.dart';
 import 'package:home_assistant_dashboard/data/models/light_state/light_state_model.dart';
 import 'package:home_assistant_dashboard/features/lights/light_state.dart';
 import 'package:home_assistant_dashboard/features/lights/light_model.dart';
@@ -26,7 +27,7 @@ class LightControlCard extends HookWidget {
   final IconData iconData;
   final String entityId;
 
-  static Widget create(
+  static StateNotifierProvider<LightModel, LightState> create(
     BuildContext context,
     IconData iconData,
     String entityId,
@@ -48,8 +49,12 @@ class LightControlCard extends HookWidget {
 
     final ValueNotifier<double?> brightness = useState(null);
     final ValueNotifier<bool> isChangingBrightness = useState(false);
-    final ValueNotifier<LightStateModel?> _lightState = useState(null);
+    final ValueNotifier<EntityStateModel?> _lightState = useState(null);
     final ValueNotifier<bool> isTurnedOn = useState(false);
+
+    final LightStateAttributes? attributes = _lightState.value != null
+        ? LightStateAttributes.fromJson(_lightState.value!.attributes)
+        : null;
 
     final _sliderValueAnimationController = useAnimationController(
       duration: LightControlUtils.sliderValueAnimationDuration,
@@ -57,8 +62,7 @@ class LightControlCard extends HookWidget {
       upperBound: LightControlUtils.sliderMax,
     );
 
-    final bool isBrightnessSupported =
-        _lightState.value?.attributes.supportedFeatures != 0;
+    final bool isBrightnessSupported = attributes?.supportedFeatures != 0;
 
     useEffect(() {
       Future.microtask(
@@ -69,7 +73,8 @@ class LightControlCard extends HookWidget {
       lightModel.getLightState.whenOrNull(success: (lightState) {
         _lightState.value = lightState;
         isTurnedOn.value = lightState.state == DeviceState.on.name;
-        brightness.value = lightState.attributes.brightness;
+        brightness.value =
+            LightStateAttributes.fromJson(lightState.attributes).brightness;
       });
     }, [lightModel.getLightState]);
 
@@ -80,8 +85,8 @@ class LightControlCard extends HookWidget {
       });
     }, [lightModel.setLightState]);
 
-    final List<int> rgbColor = _lightState.value?.attributes.rgbColor ??
-        LightControlUtils.defaultRGBColor;
+    final List<int> rgbColor =
+        attributes?.rgbColor ?? LightControlUtils.defaultRGBColor;
     final Color color = isTurnedOn.value
         ? Color.fromRGBO(
             rgbColor[0],
@@ -158,6 +163,9 @@ class LightControlCard extends HookWidget {
                                         duration: LightControlUtils
                                             .sliderValueAnimationDuration,
                                         onToggle: (value) async {
+                                          if (isBrightnessSupported && value) {
+                                            brightness.value = 100;
+                                          }
                                           await context
                                               .read<LightModel>()
                                               .setLightState(
@@ -170,8 +178,7 @@ class LightControlCard extends HookWidget {
                                           if (value) {
                                             _sliderValueAnimationController
                                                 .animateTo(
-                                              _lightState.value!.attributes
-                                                  .brightness!,
+                                              attributes!.brightness!,
                                             );
                                           } else {
                                             _sliderValueAnimationController

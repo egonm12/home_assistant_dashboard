@@ -26,7 +26,7 @@ class _$GetLightStateTearOff {
     return const _GetLightStateInProgress();
   }
 
-  _GetLightStateSuccess success(LightStateModel lightState) {
+  _GetLightStateSuccess success(EntityStateModel lightState) {
     return _GetLightStateSuccess(
       lightState,
     );
@@ -48,7 +48,7 @@ mixin _$GetLightState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() inProgress,
-    required TResult Function(LightStateModel lightState) success,
+    required TResult Function(EntityStateModel lightState) success,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,7 +56,7 @@ mixin _$GetLightState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,7 +64,7 @@ mixin _$GetLightState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -156,7 +156,7 @@ class _$_GetLightStateInitial implements _GetLightStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() inProgress,
-    required TResult Function(LightStateModel lightState) success,
+    required TResult Function(EntityStateModel lightState) success,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -167,7 +167,7 @@ class _$_GetLightStateInitial implements _GetLightStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
   }) {
     return initial?.call();
@@ -178,7 +178,7 @@ class _$_GetLightStateInitial implements _GetLightStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -274,7 +274,7 @@ class _$_GetLightStateInProgress implements _GetLightStateInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() inProgress,
-    required TResult Function(LightStateModel lightState) success,
+    required TResult Function(EntityStateModel lightState) success,
     required TResult Function(String error) error,
   }) {
     return inProgress();
@@ -285,7 +285,7 @@ class _$_GetLightStateInProgress implements _GetLightStateInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
   }) {
     return inProgress?.call();
@@ -296,7 +296,7 @@ class _$_GetLightStateInProgress implements _GetLightStateInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -353,9 +353,9 @@ abstract class _$GetLightStateSuccessCopyWith<$Res> {
   factory _$GetLightStateSuccessCopyWith(_GetLightStateSuccess value,
           $Res Function(_GetLightStateSuccess) then) =
       __$GetLightStateSuccessCopyWithImpl<$Res>;
-  $Res call({LightStateModel lightState});
+  $Res call({EntityStateModel lightState});
 
-  $LightStateModelCopyWith<$Res> get lightState;
+  $EntityStateModelCopyWith<$Res> get lightState;
 }
 
 /// @nodoc
@@ -377,13 +377,13 @@ class __$GetLightStateSuccessCopyWithImpl<$Res>
       lightState == freezed
           ? _value.lightState
           : lightState // ignore: cast_nullable_to_non_nullable
-              as LightStateModel,
+              as EntityStateModel,
     ));
   }
 
   @override
-  $LightStateModelCopyWith<$Res> get lightState {
-    return $LightStateModelCopyWith<$Res>(_value.lightState, (value) {
+  $EntityStateModelCopyWith<$Res> get lightState {
+    return $EntityStateModelCopyWith<$Res>(_value.lightState, (value) {
       return _then(_value.copyWith(lightState: value));
     });
   }
@@ -395,7 +395,7 @@ class _$_GetLightStateSuccess implements _GetLightStateSuccess {
   const _$_GetLightStateSuccess(this.lightState);
 
   @override
-  final LightStateModel lightState;
+  final EntityStateModel lightState;
 
   @override
   String toString() {
@@ -426,7 +426,7 @@ class _$_GetLightStateSuccess implements _GetLightStateSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() inProgress,
-    required TResult Function(LightStateModel lightState) success,
+    required TResult Function(EntityStateModel lightState) success,
     required TResult Function(String error) error,
   }) {
     return success(lightState);
@@ -437,7 +437,7 @@ class _$_GetLightStateSuccess implements _GetLightStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
   }) {
     return success?.call(lightState);
@@ -448,7 +448,7 @@ class _$_GetLightStateSuccess implements _GetLightStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -497,10 +497,10 @@ class _$_GetLightStateSuccess implements _GetLightStateSuccess {
 }
 
 abstract class _GetLightStateSuccess implements GetLightState {
-  const factory _GetLightStateSuccess(LightStateModel lightState) =
+  const factory _GetLightStateSuccess(EntityStateModel lightState) =
       _$_GetLightStateSuccess;
 
-  LightStateModel get lightState;
+  EntityStateModel get lightState;
   @JsonKey(ignore: true)
   _$GetLightStateSuccessCopyWith<_GetLightStateSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -573,7 +573,7 @@ class _$_GetLightStateError implements _GetLightStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() inProgress,
-    required TResult Function(LightStateModel lightState) success,
+    required TResult Function(EntityStateModel lightState) success,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -584,7 +584,7 @@ class _$_GetLightStateError implements _GetLightStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -595,7 +595,7 @@ class _$_GetLightStateError implements _GetLightStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -664,7 +664,7 @@ class _$SetLightStateTearOff {
     return const _SetLightStateInProgress();
   }
 
-  _SetLightStateSuccess success(LightStateModel lightState) {
+  _SetLightStateSuccess success(EntityStateModel lightState) {
     return _SetLightStateSuccess(
       lightState,
     );
@@ -686,7 +686,7 @@ mixin _$SetLightState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() inProgress,
-    required TResult Function(LightStateModel lightState) success,
+    required TResult Function(EntityStateModel lightState) success,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -694,7 +694,7 @@ mixin _$SetLightState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -702,7 +702,7 @@ mixin _$SetLightState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -794,7 +794,7 @@ class _$_SetLightStateInitial implements _SetLightStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() inProgress,
-    required TResult Function(LightStateModel lightState) success,
+    required TResult Function(EntityStateModel lightState) success,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -805,7 +805,7 @@ class _$_SetLightStateInitial implements _SetLightStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
   }) {
     return initial?.call();
@@ -816,7 +816,7 @@ class _$_SetLightStateInitial implements _SetLightStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -912,7 +912,7 @@ class _$_SetLightStateInProgress implements _SetLightStateInProgress {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() inProgress,
-    required TResult Function(LightStateModel lightState) success,
+    required TResult Function(EntityStateModel lightState) success,
     required TResult Function(String error) error,
   }) {
     return inProgress();
@@ -923,7 +923,7 @@ class _$_SetLightStateInProgress implements _SetLightStateInProgress {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
   }) {
     return inProgress?.call();
@@ -934,7 +934,7 @@ class _$_SetLightStateInProgress implements _SetLightStateInProgress {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -991,9 +991,9 @@ abstract class _$SetLightStateSuccessCopyWith<$Res> {
   factory _$SetLightStateSuccessCopyWith(_SetLightStateSuccess value,
           $Res Function(_SetLightStateSuccess) then) =
       __$SetLightStateSuccessCopyWithImpl<$Res>;
-  $Res call({LightStateModel lightState});
+  $Res call({EntityStateModel lightState});
 
-  $LightStateModelCopyWith<$Res> get lightState;
+  $EntityStateModelCopyWith<$Res> get lightState;
 }
 
 /// @nodoc
@@ -1015,13 +1015,13 @@ class __$SetLightStateSuccessCopyWithImpl<$Res>
       lightState == freezed
           ? _value.lightState
           : lightState // ignore: cast_nullable_to_non_nullable
-              as LightStateModel,
+              as EntityStateModel,
     ));
   }
 
   @override
-  $LightStateModelCopyWith<$Res> get lightState {
-    return $LightStateModelCopyWith<$Res>(_value.lightState, (value) {
+  $EntityStateModelCopyWith<$Res> get lightState {
+    return $EntityStateModelCopyWith<$Res>(_value.lightState, (value) {
       return _then(_value.copyWith(lightState: value));
     });
   }
@@ -1033,7 +1033,7 @@ class _$_SetLightStateSuccess implements _SetLightStateSuccess {
   const _$_SetLightStateSuccess(this.lightState);
 
   @override
-  final LightStateModel lightState;
+  final EntityStateModel lightState;
 
   @override
   String toString() {
@@ -1064,7 +1064,7 @@ class _$_SetLightStateSuccess implements _SetLightStateSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() inProgress,
-    required TResult Function(LightStateModel lightState) success,
+    required TResult Function(EntityStateModel lightState) success,
     required TResult Function(String error) error,
   }) {
     return success(lightState);
@@ -1075,7 +1075,7 @@ class _$_SetLightStateSuccess implements _SetLightStateSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
   }) {
     return success?.call(lightState);
@@ -1086,7 +1086,7 @@ class _$_SetLightStateSuccess implements _SetLightStateSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -1135,10 +1135,10 @@ class _$_SetLightStateSuccess implements _SetLightStateSuccess {
 }
 
 abstract class _SetLightStateSuccess implements SetLightState {
-  const factory _SetLightStateSuccess(LightStateModel lightState) =
+  const factory _SetLightStateSuccess(EntityStateModel lightState) =
       _$_SetLightStateSuccess;
 
-  LightStateModel get lightState;
+  EntityStateModel get lightState;
   @JsonKey(ignore: true)
   _$SetLightStateSuccessCopyWith<_SetLightStateSuccess> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1211,7 +1211,7 @@ class _$_SetLightStateError implements _SetLightStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() inProgress,
-    required TResult Function(LightStateModel lightState) success,
+    required TResult Function(EntityStateModel lightState) success,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -1222,7 +1222,7 @@ class _$_SetLightStateError implements _SetLightStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -1233,7 +1233,7 @@ class _$_SetLightStateError implements _SetLightStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? inProgress,
-    TResult Function(LightStateModel lightState)? success,
+    TResult Function(EntityStateModel lightState)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {

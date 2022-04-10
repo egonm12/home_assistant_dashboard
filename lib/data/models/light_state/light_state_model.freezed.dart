@@ -14,317 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-LightStateModel _$LightStateModelFromJson(Map<String, dynamic> json) {
-  return _LightStateModel.fromJson(json);
-}
-
-/// @nodoc
-class _$LightStateModelTearOff {
-  const _$LightStateModelTearOff();
-
-  _LightStateModel call(
-      {@JsonKey(name: 'entity_id') required String entityId,
-      required String state,
-      required Attributes attributes,
-      @JsonKey(name: 'last_changed') required DateTime lastChanged,
-      @JsonKey(name: 'last_updated') required DateTime lastUpdated,
-      required Context context}) {
-    return _LightStateModel(
-      entityId: entityId,
-      state: state,
-      attributes: attributes,
-      lastChanged: lastChanged,
-      lastUpdated: lastUpdated,
-      context: context,
-    );
-  }
-
-  LightStateModel fromJson(Map<String, Object?> json) {
-    return LightStateModel.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $LightStateModel = _$LightStateModelTearOff();
-
-/// @nodoc
-mixin _$LightStateModel {
-  @JsonKey(name: 'entity_id')
-  String get entityId => throw _privateConstructorUsedError;
-  String get state => throw _privateConstructorUsedError;
-  Attributes get attributes => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_changed')
-  DateTime get lastChanged => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_updated')
-  DateTime get lastUpdated => throw _privateConstructorUsedError;
-  Context get context => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $LightStateModelCopyWith<LightStateModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $LightStateModelCopyWith<$Res> {
-  factory $LightStateModelCopyWith(
-          LightStateModel value, $Res Function(LightStateModel) then) =
-      _$LightStateModelCopyWithImpl<$Res>;
-  $Res call(
-      {@JsonKey(name: 'entity_id') String entityId,
-      String state,
-      Attributes attributes,
-      @JsonKey(name: 'last_changed') DateTime lastChanged,
-      @JsonKey(name: 'last_updated') DateTime lastUpdated,
-      Context context});
-
-  $AttributesCopyWith<$Res> get attributes;
-  $ContextCopyWith<$Res> get context;
-}
-
-/// @nodoc
-class _$LightStateModelCopyWithImpl<$Res>
-    implements $LightStateModelCopyWith<$Res> {
-  _$LightStateModelCopyWithImpl(this._value, this._then);
-
-  final LightStateModel _value;
-  // ignore: unused_field
-  final $Res Function(LightStateModel) _then;
-
-  @override
-  $Res call({
-    Object? entityId = freezed,
-    Object? state = freezed,
-    Object? attributes = freezed,
-    Object? lastChanged = freezed,
-    Object? lastUpdated = freezed,
-    Object? context = freezed,
-  }) {
-    return _then(_value.copyWith(
-      entityId: entityId == freezed
-          ? _value.entityId
-          : entityId // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: state == freezed
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String,
-      attributes: attributes == freezed
-          ? _value.attributes
-          : attributes // ignore: cast_nullable_to_non_nullable
-              as Attributes,
-      lastChanged: lastChanged == freezed
-          ? _value.lastChanged
-          : lastChanged // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      lastUpdated: lastUpdated == freezed
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      context: context == freezed
-          ? _value.context
-          : context // ignore: cast_nullable_to_non_nullable
-              as Context,
-    ));
-  }
-
-  @override
-  $AttributesCopyWith<$Res> get attributes {
-    return $AttributesCopyWith<$Res>(_value.attributes, (value) {
-      return _then(_value.copyWith(attributes: value));
-    });
-  }
-
-  @override
-  $ContextCopyWith<$Res> get context {
-    return $ContextCopyWith<$Res>(_value.context, (value) {
-      return _then(_value.copyWith(context: value));
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$LightStateModelCopyWith<$Res>
-    implements $LightStateModelCopyWith<$Res> {
-  factory _$LightStateModelCopyWith(
-          _LightStateModel value, $Res Function(_LightStateModel) then) =
-      __$LightStateModelCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {@JsonKey(name: 'entity_id') String entityId,
-      String state,
-      Attributes attributes,
-      @JsonKey(name: 'last_changed') DateTime lastChanged,
-      @JsonKey(name: 'last_updated') DateTime lastUpdated,
-      Context context});
-
-  @override
-  $AttributesCopyWith<$Res> get attributes;
-  @override
-  $ContextCopyWith<$Res> get context;
-}
-
-/// @nodoc
-class __$LightStateModelCopyWithImpl<$Res>
-    extends _$LightStateModelCopyWithImpl<$Res>
-    implements _$LightStateModelCopyWith<$Res> {
-  __$LightStateModelCopyWithImpl(
-      _LightStateModel _value, $Res Function(_LightStateModel) _then)
-      : super(_value, (v) => _then(v as _LightStateModel));
-
-  @override
-  _LightStateModel get _value => super._value as _LightStateModel;
-
-  @override
-  $Res call({
-    Object? entityId = freezed,
-    Object? state = freezed,
-    Object? attributes = freezed,
-    Object? lastChanged = freezed,
-    Object? lastUpdated = freezed,
-    Object? context = freezed,
-  }) {
-    return _then(_LightStateModel(
-      entityId: entityId == freezed
-          ? _value.entityId
-          : entityId // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: state == freezed
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String,
-      attributes: attributes == freezed
-          ? _value.attributes
-          : attributes // ignore: cast_nullable_to_non_nullable
-              as Attributes,
-      lastChanged: lastChanged == freezed
-          ? _value.lastChanged
-          : lastChanged // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      lastUpdated: lastUpdated == freezed
-          ? _value.lastUpdated
-          : lastUpdated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      context: context == freezed
-          ? _value.context
-          : context // ignore: cast_nullable_to_non_nullable
-              as Context,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_LightStateModel implements _LightStateModel {
-  const _$_LightStateModel(
-      {@JsonKey(name: 'entity_id') required this.entityId,
-      required this.state,
-      required this.attributes,
-      @JsonKey(name: 'last_changed') required this.lastChanged,
-      @JsonKey(name: 'last_updated') required this.lastUpdated,
-      required this.context});
-
-  factory _$_LightStateModel.fromJson(Map<String, dynamic> json) =>
-      _$$_LightStateModelFromJson(json);
-
-  @override
-  @JsonKey(name: 'entity_id')
-  final String entityId;
-  @override
-  final String state;
-  @override
-  final Attributes attributes;
-  @override
-  @JsonKey(name: 'last_changed')
-  final DateTime lastChanged;
-  @override
-  @JsonKey(name: 'last_updated')
-  final DateTime lastUpdated;
-  @override
-  final Context context;
-
-  @override
-  String toString() {
-    return 'LightStateModel(entityId: $entityId, state: $state, attributes: $attributes, lastChanged: $lastChanged, lastUpdated: $lastUpdated, context: $context)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _LightStateModel &&
-            const DeepCollectionEquality().equals(other.entityId, entityId) &&
-            const DeepCollectionEquality().equals(other.state, state) &&
-            const DeepCollectionEquality()
-                .equals(other.attributes, attributes) &&
-            const DeepCollectionEquality()
-                .equals(other.lastChanged, lastChanged) &&
-            const DeepCollectionEquality()
-                .equals(other.lastUpdated, lastUpdated) &&
-            const DeepCollectionEquality().equals(other.context, context));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(entityId),
-      const DeepCollectionEquality().hash(state),
-      const DeepCollectionEquality().hash(attributes),
-      const DeepCollectionEquality().hash(lastChanged),
-      const DeepCollectionEquality().hash(lastUpdated),
-      const DeepCollectionEquality().hash(context));
-
-  @JsonKey(ignore: true)
-  @override
-  _$LightStateModelCopyWith<_LightStateModel> get copyWith =>
-      __$LightStateModelCopyWithImpl<_LightStateModel>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_LightStateModelToJson(this);
-  }
-}
-
-abstract class _LightStateModel implements LightStateModel {
-  const factory _LightStateModel(
-      {@JsonKey(name: 'entity_id') required String entityId,
-      required String state,
-      required Attributes attributes,
-      @JsonKey(name: 'last_changed') required DateTime lastChanged,
-      @JsonKey(name: 'last_updated') required DateTime lastUpdated,
-      required Context context}) = _$_LightStateModel;
-
-  factory _LightStateModel.fromJson(Map<String, dynamic> json) =
-      _$_LightStateModel.fromJson;
-
-  @override
-  @JsonKey(name: 'entity_id')
-  String get entityId;
-  @override
-  String get state;
-  @override
-  Attributes get attributes;
-  @override
-  @JsonKey(name: 'last_changed')
-  DateTime get lastChanged;
-  @override
-  @JsonKey(name: 'last_updated')
-  DateTime get lastUpdated;
-  @override
-  Context get context;
-  @override
-  @JsonKey(ignore: true)
-  _$LightStateModelCopyWith<_LightStateModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Attributes _$AttributesFromJson(Map<String, dynamic> json) {
+LightStateAttributes _$LightStateAttributesFromJson(Map<String, dynamic> json) {
   return _Attributes.fromJson(json);
 }
 
 /// @nodoc
-class _$AttributesTearOff {
-  const _$AttributesTearOff();
+class _$LightStateAttributesTearOff {
+  const _$LightStateAttributesTearOff();
 
   _Attributes call(
       {@JsonKey(name: 'min_mireds') int? minMireds,
@@ -357,16 +53,16 @@ class _$AttributesTearOff {
     );
   }
 
-  Attributes fromJson(Map<String, Object?> json) {
-    return Attributes.fromJson(json);
+  LightStateAttributes fromJson(Map<String, Object?> json) {
+    return LightStateAttributes.fromJson(json);
   }
 }
 
 /// @nodoc
-const $Attributes = _$AttributesTearOff();
+const $LightStateAttributes = _$LightStateAttributesTearOff();
 
 /// @nodoc
-mixin _$Attributes {
+mixin _$LightStateAttributes {
   @JsonKey(name: 'min_mireds')
   int? get minMireds => throw _privateConstructorUsedError;
   @JsonKey(name: 'max_mireds')
@@ -394,15 +90,15 @@ mixin _$Attributes {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AttributesCopyWith<Attributes> get copyWith =>
+  $LightStateAttributesCopyWith<LightStateAttributes> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AttributesCopyWith<$Res> {
-  factory $AttributesCopyWith(
-          Attributes value, $Res Function(Attributes) then) =
-      _$AttributesCopyWithImpl<$Res>;
+abstract class $LightStateAttributesCopyWith<$Res> {
+  factory $LightStateAttributesCopyWith(LightStateAttributes value,
+          $Res Function(LightStateAttributes) then) =
+      _$LightStateAttributesCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: 'min_mireds') int? minMireds,
       @JsonKey(name: 'max_mireds') int? maxMireds,
@@ -420,12 +116,13 @@ abstract class $AttributesCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AttributesCopyWithImpl<$Res> implements $AttributesCopyWith<$Res> {
-  _$AttributesCopyWithImpl(this._value, this._then);
+class _$LightStateAttributesCopyWithImpl<$Res>
+    implements $LightStateAttributesCopyWith<$Res> {
+  _$LightStateAttributesCopyWithImpl(this._value, this._then);
 
-  final Attributes _value;
+  final LightStateAttributes _value;
   // ignore: unused_field
-  final $Res Function(Attributes) _then;
+  final $Res Function(LightStateAttributes) _then;
 
   @override
   $Res call({
@@ -501,7 +198,8 @@ class _$AttributesCopyWithImpl<$Res> implements $AttributesCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$AttributesCopyWith<$Res> implements $AttributesCopyWith<$Res> {
+abstract class _$AttributesCopyWith<$Res>
+    implements $LightStateAttributesCopyWith<$Res> {
   factory _$AttributesCopyWith(
           _Attributes value, $Res Function(_Attributes) then) =
       __$AttributesCopyWithImpl<$Res>;
@@ -523,7 +221,8 @@ abstract class _$AttributesCopyWith<$Res> implements $AttributesCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$AttributesCopyWithImpl<$Res> extends _$AttributesCopyWithImpl<$Res>
+class __$AttributesCopyWithImpl<$Res>
+    extends _$LightStateAttributesCopyWithImpl<$Res>
     implements _$AttributesCopyWith<$Res> {
   __$AttributesCopyWithImpl(
       _Attributes _value, $Res Function(_Attributes) _then)
@@ -666,7 +365,7 @@ class _$_Attributes implements _Attributes {
 
   @override
   String toString() {
-    return 'Attributes(minMireds: $minMireds, maxMireds: $maxMireds, supportedColorModes: $supportedColorModes, colorMode: $colorMode, brightness: $brightness, colorTemp: $colorTemp, hsColor: $hsColor, rgbColor: $rgbColor, xyColor: $xyColor, mode: $mode, dynamics: $dynamics, friendlyName: $friendlyName, supportedFeatures: $supportedFeatures)';
+    return 'LightStateAttributes(minMireds: $minMireds, maxMireds: $maxMireds, supportedColorModes: $supportedColorModes, colorMode: $colorMode, brightness: $brightness, colorTemp: $colorTemp, hsColor: $hsColor, rgbColor: $rgbColor, xyColor: $xyColor, mode: $mode, dynamics: $dynamics, friendlyName: $friendlyName, supportedFeatures: $supportedFeatures)';
   }
 
   @override
@@ -721,7 +420,7 @@ class _$_Attributes implements _Attributes {
   }
 }
 
-abstract class _Attributes implements Attributes {
+abstract class _Attributes implements LightStateAttributes {
   const factory _Attributes(
       {@JsonKey(name: 'min_mireds')
           int? minMireds,
@@ -791,204 +490,5 @@ abstract class _Attributes implements Attributes {
   @override
   @JsonKey(ignore: true)
   _$AttributesCopyWith<_Attributes> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Context _$ContextFromJson(Map<String, dynamic> json) {
-  return _Context.fromJson(json);
-}
-
-/// @nodoc
-class _$ContextTearOff {
-  const _$ContextTearOff();
-
-  _Context call(
-      {required String id,
-      @JsonKey(name: 'parent_id') String? parentId,
-      @JsonKey(name: 'user_id') String? userId}) {
-    return _Context(
-      id: id,
-      parentId: parentId,
-      userId: userId,
-    );
-  }
-
-  Context fromJson(Map<String, Object?> json) {
-    return Context.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Context = _$ContextTearOff();
-
-/// @nodoc
-mixin _$Context {
-  String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'parent_id')
-  String? get parentId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_id')
-  String? get userId => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ContextCopyWith<Context> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ContextCopyWith<$Res> {
-  factory $ContextCopyWith(Context value, $Res Function(Context) then) =
-      _$ContextCopyWithImpl<$Res>;
-  $Res call(
-      {String id,
-      @JsonKey(name: 'parent_id') String? parentId,
-      @JsonKey(name: 'user_id') String? userId});
-}
-
-/// @nodoc
-class _$ContextCopyWithImpl<$Res> implements $ContextCopyWith<$Res> {
-  _$ContextCopyWithImpl(this._value, this._then);
-
-  final Context _value;
-  // ignore: unused_field
-  final $Res Function(Context) _then;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? parentId = freezed,
-    Object? userId = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      parentId: parentId == freezed
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$ContextCopyWith<$Res> implements $ContextCopyWith<$Res> {
-  factory _$ContextCopyWith(_Context value, $Res Function(_Context) then) =
-      __$ContextCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {String id,
-      @JsonKey(name: 'parent_id') String? parentId,
-      @JsonKey(name: 'user_id') String? userId});
-}
-
-/// @nodoc
-class __$ContextCopyWithImpl<$Res> extends _$ContextCopyWithImpl<$Res>
-    implements _$ContextCopyWith<$Res> {
-  __$ContextCopyWithImpl(_Context _value, $Res Function(_Context) _then)
-      : super(_value, (v) => _then(v as _Context));
-
-  @override
-  _Context get _value => super._value as _Context;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? parentId = freezed,
-    Object? userId = freezed,
-  }) {
-    return _then(_Context(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      parentId: parentId == freezed
-          ? _value.parentId
-          : parentId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userId: userId == freezed
-          ? _value.userId
-          : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Context implements _Context {
-  const _$_Context(
-      {required this.id,
-      @JsonKey(name: 'parent_id') this.parentId,
-      @JsonKey(name: 'user_id') this.userId});
-
-  factory _$_Context.fromJson(Map<String, dynamic> json) =>
-      _$$_ContextFromJson(json);
-
-  @override
-  final String id;
-  @override
-  @JsonKey(name: 'parent_id')
-  final String? parentId;
-  @override
-  @JsonKey(name: 'user_id')
-  final String? userId;
-
-  @override
-  String toString() {
-    return 'Context(id: $id, parentId: $parentId, userId: $userId)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Context &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.parentId, parentId) &&
-            const DeepCollectionEquality().equals(other.userId, userId));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(parentId),
-      const DeepCollectionEquality().hash(userId));
-
-  @JsonKey(ignore: true)
-  @override
-  _$ContextCopyWith<_Context> get copyWith =>
-      __$ContextCopyWithImpl<_Context>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ContextToJson(this);
-  }
-}
-
-abstract class _Context implements Context {
-  const factory _Context(
-      {required String id,
-      @JsonKey(name: 'parent_id') String? parentId,
-      @JsonKey(name: 'user_id') String? userId}) = _$_Context;
-
-  factory _Context.fromJson(Map<String, dynamic> json) = _$_Context.fromJson;
-
-  @override
-  String get id;
-  @override
-  @JsonKey(name: 'parent_id')
-  String? get parentId;
-  @override
-  @JsonKey(name: 'user_id')
-  String? get userId;
-  @override
-  @JsonKey(ignore: true)
-  _$ContextCopyWith<_Context> get copyWith =>
       throw _privateConstructorUsedError;
 }

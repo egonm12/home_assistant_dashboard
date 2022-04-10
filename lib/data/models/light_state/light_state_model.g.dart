@@ -6,27 +6,6 @@ part of 'light_state_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LightStateModel _$$_LightStateModelFromJson(Map<String, dynamic> json) =>
-    _$_LightStateModel(
-      entityId: json['entity_id'] as String,
-      state: json['state'] as String,
-      attributes:
-          Attributes.fromJson(json['attributes'] as Map<String, dynamic>),
-      lastChanged: DateTime.parse(json['last_changed'] as String),
-      lastUpdated: DateTime.parse(json['last_updated'] as String),
-      context: Context.fromJson(json['context'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$$_LightStateModelToJson(_$_LightStateModel instance) =>
-    <String, dynamic>{
-      'entity_id': instance.entityId,
-      'state': instance.state,
-      'attributes': instance.attributes,
-      'last_changed': instance.lastChanged.toIso8601String(),
-      'last_updated': instance.lastUpdated.toIso8601String(),
-      'context': instance.context,
-    };
-
 _$_Attributes _$$_AttributesFromJson(Map<String, dynamic> json) =>
     _$_Attributes(
       minMireds: json['min_mireds'] as int?,
@@ -66,17 +45,4 @@ Map<String, dynamic> _$$_AttributesToJson(_$_Attributes instance) =>
       'dynamics': instance.dynamics,
       'friendly_name': instance.friendlyName,
       'supported_features': instance.supportedFeatures,
-    };
-
-_$_Context _$$_ContextFromJson(Map<String, dynamic> json) => _$_Context(
-      id: json['id'] as String,
-      parentId: json['parent_id'] as String?,
-      userId: json['user_id'] as String?,
-    );
-
-Map<String, dynamic> _$$_ContextToJson(_$_Context instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'parent_id': instance.parentId,
-      'user_id': instance.userId,
     };

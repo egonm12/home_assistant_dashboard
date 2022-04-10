@@ -1,4 +1,4 @@
-import 'package:home_assistant_dashboard/data/models/light_state/light_state_model.dart';
+import 'package:home_assistant_dashboard/data/models/entity_state/entity_state_model.dart';
 import 'package:home_assistant_dashboard/data/repositories/lights/lights_repository.dart';
 import 'package:home_assistant_dashboard/features/lights/light_state.dart';
 import 'package:home_assistant_dashboard/widgets/light_control_card/light_control_card.dart';
@@ -17,7 +17,7 @@ class LightModel extends StateNotifier<LightState> {
   final LightsRepository lightsRepository;
 
   Future<void> getLightState(String entityId) async {
-    await Future.delayed(const Duration(seconds: 2));
+    // await Future.delayed(const Duration(seconds: 2));
     state = state.copyWith(getLightState: const GetLightState.inProgress());
     try {
       final lightState = await lightsRepository.getLightState(entityId);
@@ -33,7 +33,7 @@ class LightModel extends StateNotifier<LightState> {
   Future<void> setLightState(
     String entityId,
     DeviceState deviceState,
-    LightStateModel lightState,
+    EntityStateModel lightState,
   ) async {
     state = state.copyWith(setLightState: const SetLightState.inProgress());
     try {

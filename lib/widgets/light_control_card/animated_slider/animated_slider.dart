@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:home_assistant_dashboard/data/models/entity_state/entity_state_model.dart';
 import 'package:home_assistant_dashboard/data/models/light_state/light_state_model.dart';
 import 'package:home_assistant_dashboard/features/lights/light_model.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,7 @@ class AnimatedSlider extends HookWidget {
 
   final bool disabled;
   final String entityId;
-  final LightStateModel lightState;
+  final EntityStateModel lightState;
   final ValueNotifier<double?> brightness;
   final ValueNotifier<bool> isChangingBrightness;
   final AnimationController sliderValueAnimationController;
@@ -95,9 +96,12 @@ class AnimatedSlider extends HookWidget {
                           entityId,
                           DeviceState.on,
                           lightState.copyWith(
-                            attributes: lightState.attributes.copyWith(
-                              brightness: value,
-                            ),
+                            attributes: LightStateAttributes.fromJson(
+                                    lightState.attributes)
+                                .copyWith(
+                                  brightness: value,
+                                )
+                                .toJson(),
                           ),
                         );
                     // final newLightState =
