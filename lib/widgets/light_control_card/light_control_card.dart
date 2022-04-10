@@ -150,6 +150,10 @@ class LightControlCard extends HookWidget {
                                   brightnessBalance: brightnessBalance,
                                   iconData: iconData,
                                   isTurnedOn: isTurnedOn.value,
+                                  entityName: LightStateAttributes.fromJson(
+                                              _lightState.value!.attributes)
+                                          .friendlyName ??
+                                      '',
                                 ),
                                 if (!isChangingBrightness.value)
                                   Align(

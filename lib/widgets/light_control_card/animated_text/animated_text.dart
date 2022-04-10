@@ -10,12 +10,14 @@ class AnimatedText extends HookWidget {
     required this.iconData,
     required this.brightnessBalance,
     required this.isTurnedOn,
+    required this.entityName,
   }) : super(key: key);
 
   final bool isChangingBrightness;
   final IconData iconData;
   final num brightnessBalance;
   final bool isTurnedOn;
+  final String entityName;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class AnimatedText extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Werkkamer',
+                entityName,
                 style: Theme.of(context).textTheme.headline6,
               ),
               Text(

@@ -5,7 +5,7 @@ class LightControlUtils {
   static const sliderAnimationDuration = Duration(milliseconds: 60);
   static const sliderValueAnimationDuration = Duration(milliseconds: 90);
   static const double boxShadowRadius = 50.0;
-  static const double height = 120.0;
+  static const double height = 110.0;
   static const double sliderMax = 255;
   static const double sliderMin = 1;
 
